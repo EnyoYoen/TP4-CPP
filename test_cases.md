@@ -11,7 +11,7 @@
 | 7   | -e -t                                | Idem que sans paramètre + exclusion des documents images, CSS, ou JS, le tout pour heure inclut à heure+1 exclut |
 | 8   | -e -t -g                             | 10 documents les + consultés + fichier GraphViz + créneau horaire + exclusion des fichiers images, CSS, JS       |
 | 9   | -g SANS NOM DE FICHIER               | cerr => message d'erreur                                                                                         |
-| 10  | -t HEURE INCOHERANT (négative, > 23) | cerr => message d'erreur                                                                                         |
+| 10  | -t HEURE INCOHERENTE (négative, > 23) | cerr => message d'erreur                                                                                         |
 | 11  | Fichier log absent                   | cerr => message d'erreur                                                                                         |
 | 12  | -t SANS HEURE                        | cerr => message d'erreur                                                                                         |
 | 13  | FICHIER LOG VIDE                     | cerr => message d'avertissement                                                                                  |

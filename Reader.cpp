@@ -15,6 +15,11 @@ void Reader::readRequests()
 		throw runtime_error("Could not open file");
 	}
 
+	if (file.peek() == ifstream::traits_type::eof())
+	{
+		throw runtime_error("File is empty");
+	}
+
 	string line;
 	while (getline(file, line))
 	{
