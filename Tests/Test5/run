@@ -1,1 +1,1 @@
-cat 
+../../analog.exe -e -g out.dot ../../exemple-mini-non-exhaustif.txt
