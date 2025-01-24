@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -Wall -std=c++11 -g
 LDFLAGS =
 
-SRCS = main.cpp Reader.cpp Graph.cpp Request.cpp
+SRCS = main.cpp Reader.cpp Graph.cpp Request.cpp DateTime.cpp
 HEADERS = Reader.h Graph.h Request.h
 OBJS = $(SRCS:.cpp=.o)
 TARGET = analog 

@@ -10,13 +10,21 @@ bool sortHits(const Hits& a, const Hits& b) {
 
 Graph::Graph(const int start, bool exclude)
     : exclude(exclude), start(start), nextVertexId(0) {}
+Graph::Graph(const string& start, bool exclude)
+    : exclude(exclude), nextVertexId(0) {
+        if (!start.empty()) {
+            this->start = new DateTime(start);
+        } else {
+           this->start = nullptr;
+        }
+    }
 
 void Graph::unmarshalRequest(const string& rawRequest) {
     Request req;
     istringstream iss(rawRequest);
     iss >> req;
 
-    if (isExtensionExcluded(req.resource)) {
+    if (isExtensionExcluded(req.resource) || isTimeExcluded(*req.infos.dateTime)) {
         return;
     }
 
@@ -103,6 +111,20 @@ bool Graph::isExtensionExcluded(const string& resource) const {
     if (exclude) {
         const string extension = resource.substr(resource.find_last_of('.'));
         if (extension == ".css" || extension == ".js" || extension == ".png" || extension == ".jpg" || extension == ".gif") {
+            return true;
+        }
+    }
+
+    return result;
+}
+
+bool Graph::isTimeExcluded(const DateTime& dt) const {
+    bool result = false;
+
+    if (start != nullptr) {
+        ll diff = dt.secondsBetween(*start);
+        if (diff < 0 || diff >= 3600) {
+            cout << "Diff: " << diff << endl;
             return true;
         }
     }
