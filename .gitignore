@@ -2,3 +2,5 @@
 *.o
 *.exe
 *.dot
+*.svg
+message.txt

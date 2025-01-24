@@ -53,7 +53,18 @@ int main(int argc, char* argv[]) {
 				return showHelp(argv[0]);
 			}
 
-			timeLimit = atoi(argv[i+1]);
+			try {
+				timeLimit = std::stoi(argv[i+1]);
+			} catch (const std::invalid_argument&) {
+				std::cerr << "Heure invalide: " << argv[i+1] << std::endl;
+				return showHelp(argv[0]);
+			}
+
+			if (timeLimit < 0 || timeLimit > 23) {
+				std::cerr << "Heure invalide: " << argv[i+1] << std::endl;
+				return showHelp(argv[0]);
+			}
+
 			i+=2;
 		} else {
 			return showHelp(argv[0]);
