@@ -8,7 +8,7 @@ bool sortHits(const Hits& a, const Hits& b) {
 }
 
 
-Graph::Graph(const string& start, bool exclude)
+Graph::Graph(const int start, bool exclude)
     : exclude(exclude), start(start), nextVertexId(0) {}
 
 void Graph::unmarshalRequest(const string& rawRequest) {

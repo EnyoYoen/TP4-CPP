@@ -1,4 +1,4 @@
 *.png
 *.o
-main.exe
+*.exe
 *.dot
