@@ -8,6 +8,12 @@
 
 using namespace std;
 
+/*
+Ce fichier contient deux classes permettant de stocker les données des requetes.
+La struct Infos permet d'encapsuler toutes les informations.
+La classe Request contient deux surcharges d'opérateurs pour la sérialisation et la désérialisation des requetes.
+*/
+
 struct Infos {
     Infos() : dateTime(nullptr) {}
     Infos(const string& ip, const string& userLogName, const string& userName,

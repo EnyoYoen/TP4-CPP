@@ -7,6 +7,11 @@
 
 using namespace std;
 
+/*
+Cette classe permet de gérer toutes les opérations de fichiers
+et de générer le graphe associé.
+*/
+
 class Reader {
 public:
     Reader(const string& filename, const string& start = string(), int hour = -1, bool exclude = false);

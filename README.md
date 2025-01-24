@@ -31,4 +31,8 @@ javascript.
 Cette option permet de ne prendre en compte que les hits qui sont dans le créneau horaire
 correspondant à l’intervalle [heure, heure+1[.
 
+### Génération du graphe
+
+Afin de générer le graphe, nous avons utilisé un [Google Colab](https://colab.research.google.com/drive/1majZD5knMa9tQFhNKNB2k5eNkj9B504m?usp=sharing), qui permet de générer l'image beaucoup plus rapidement que sur nos machines personnelles.
+
 ![Alt Text](https://static.printler.com/cache/c/4/1/7/d/c/c417dc9c0acfba8b61c6a40e81636b953e9a5566.jpg)

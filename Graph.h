@@ -11,6 +11,10 @@
 
 using namespace std;
 
+/*
+Cette classe permet de représenter un graphe orienté, et de l'exporter au format .dot.
+*/
+
 typedef pair<string, int> Hits;
 
 class Graph {

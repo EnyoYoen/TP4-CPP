@@ -4,6 +4,7 @@
 #include <iostream>
 
 DateTime::DateTime(const string& rfc2822) {
+	// Permet de parser une date au format RFC2822
     istringstream is(rfc2822);
     is >> day;
     is.ignore(1); // Ignore the slash
@@ -25,6 +26,7 @@ DateTime::DateTime(const string& rfc2822) {
 }
 
 ll DateTime::secondsBetween(const DateTime& dt) const {
+	// Retourne le nombre de secondes entre deux dates
     ll yearDiff = this->year - dt.year;
     int monthDiff = this->month - dt.month;
     int dayDiff = this->day - dt.day;
@@ -36,6 +38,8 @@ ll DateTime::secondsBetween(const DateTime& dt) const {
 }
 
 ostream& operator<<(ostream& os, const DateTime& dt) {
+	// Permet d'afficher une date
+	// Utilisée pour le debug
     os << dt.day << "/" << dt.month << "/" << dt.year << ":" << dt.hour << ":" << dt.minute << ":" << dt.second;
 
     return os;

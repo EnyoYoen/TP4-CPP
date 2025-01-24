@@ -1,6 +1,7 @@
 #include "Request.h"
 
 istream& operator>>(istream& is, Request& req) {
+	// Permet de parser les informations pour une ligne de log
     getline(is, req.infos.ip, ' ');
     getline(is, req.infos.userLogName, ' ');
     getline(is, req.infos.userName, ' ');
@@ -30,7 +31,9 @@ istream& operator>>(istream& is, Request& req) {
 }
 
 ostream& operator<<(ostream& os, const Request& req) {
-    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << *req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\" " << req.infos.referer;
-    
+	// Permet d'afficher les informations récupérée
+	// Utilisée pour le debug
+    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << *req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
+
     return os;
 }
