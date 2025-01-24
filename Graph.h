@@ -16,6 +16,9 @@ Cette classe permet de représenter un graphe orienté, et de l'exporter au form
 */
 
 typedef pair<string, int> Hits;
+typedef pair<int, int> Edge;
+typedef pair<string, int> Vertex;
+typedef pair<int, unordered_map<int, int>> EdgeMap;
 
 class Graph {
 public:

@@ -35,7 +35,7 @@ void Reader::writeGraph(const string &out)
 	list<Hits> hits = graph.getMostHitResources();
 
 	int count = 0;
-	for (const auto &hit : hits)
+	for (const Hits &hit : hits)
 	{
 		count++;
 		cout << hit.first << " (" << hit.second << " hits)" << endl;
