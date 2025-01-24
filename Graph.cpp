@@ -8,6 +8,8 @@ bool sortHits(const Hits& a, const Hits& b) {
 }
 
 
+Graph::Graph(const int start, bool exclude)
+    : exclude(exclude), start(start), nextVertexId(0) {}
 Graph::Graph(const string& start, bool exclude)
     : exclude(exclude), nextVertexId(0) {
         if (!start.empty()) {

@@ -9,14 +9,14 @@ using namespace std;
 
 class Reader {
 public:
-    Reader(const string& filename, const string& out = string(), const string& start = string(), bool exclude = false);
+    Reader(const string& filename, const int start = -1, bool exclude = false);
 
     void readRequests();
 
-    void writeGraph();
+    void writeGraph(const string& out);
 
 private:
-    void writeGraphToFile();
+    void writeGraphToFile(const string& out);
 
     Graph graph;
     string filename;

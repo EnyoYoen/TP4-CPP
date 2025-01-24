@@ -15,7 +15,7 @@ typedef pair<string, int> Hits;
 
 class Graph {
 public:
-    Graph(const string& start = string(), bool exclude = false);
+    Graph(const int start = -1, bool exclude = false);
 
     void unmarshalRequest(const string& rawRequest);
 

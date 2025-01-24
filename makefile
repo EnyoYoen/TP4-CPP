@@ -5,7 +5,7 @@ LDFLAGS =
 SRCS = main.cpp Reader.cpp Graph.cpp Request.cpp DateTime.cpp
 HEADERS = Reader.h Graph.h Request.h
 OBJS = $(SRCS:.cpp=.o)
-TARGET = main
+TARGET = analog 
 
 all: $(TARGET)
 
