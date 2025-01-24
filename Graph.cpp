@@ -138,7 +138,7 @@ bool Graph::isExtensionExcluded(const string& resource) const {
         size_t last = resource.find_last_of('.');
         if (last != string::npos) {
             const string extension = resource.substr(resource.find_last_of('.'));
-            if (extension == ".css" || extension == ".js" || extension == ".png" || extension == ".jpg" || extension == ".gif") {
+            if (extension == ".css" || extension == ".js" || extension == ".png" || extension == ".jpg" || extension == ".gif" || extension == ".ico") {
                 return true;
             }
         }
