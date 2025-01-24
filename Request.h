@@ -24,7 +24,12 @@ struct Infos {
           size(size), referer(referer), userAgent(userAgent) {
             this->dateTime = new DateTime(dateTime);
           }
-    ~Infos() {delete dateTime;}
+    ~Infos() {
+        if (dateTime != nullptr) {
+            delete dateTime;
+            dateTime = nullptr;
+        }
+    }
 
     string ip;
     string userLogName;

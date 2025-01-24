@@ -20,8 +20,6 @@ int main(int argc, char *argv[])
 	{
 		return showHelp(argv[0]);
 	}
-
-	string inputFile = argv[argc - 1];
 	// Parse options
 
 	bool excludeMeta = false;
@@ -89,6 +87,12 @@ int main(int argc, char *argv[])
 			return showHelp(argv[0]);
 		}
 	}
+
+	if (i != argc - 1)
+	{
+		return showHelp(argv[0]);
+	}
+	string inputFile = argv[argc - 1];
 
 	Reader reader(inputFile, string(), timeLimit, excludeMeta);
 
