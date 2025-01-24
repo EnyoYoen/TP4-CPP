@@ -9,7 +9,7 @@ using namespace std;
 
 class Reader {
 public:
-    Reader(const string& filename, const int start = -1, bool exclude = false);
+    Reader(const string& filename, const string& start = string(), int hour = -1, bool exclude = false);
 
     void readRequests();
 

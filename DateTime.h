@@ -15,6 +15,8 @@ public:
 
     ll secondsBetween(const DateTime& dt) const;
 
+    int getHour() const { return hour; }
+
     friend ostream& operator<<(ostream& os, const DateTime& dt);
 
 private:

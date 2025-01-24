@@ -15,7 +15,7 @@ typedef pair<string, int> Hits;
 
 class Graph {
 public:
-    Graph(const int start = -1, bool exclude = false);
+    Graph(const string& start = string(), int hour = -1, bool exclude = false);
 
     void unmarshalRequest(const string& rawRequest);
 
@@ -24,12 +24,14 @@ public:
     friend ostream& operator<<(ostream& os, const Graph& graph);
 
 private:
+    const string trimOptions(const string& address) const;
     const string getSourceFromReferer(const string& referer) const;
     bool isExtensionExcluded(const string& resource) const;
     bool isTimeExcluded(const DateTime& dt) const;
 
 
     bool exclude;
+    int hour;
     DateTime *start;
 
     size_t nextVertexId;

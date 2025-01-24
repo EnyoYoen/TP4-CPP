@@ -13,6 +13,10 @@ int showHelp(char* exec_path) {
 }
 
 int main(int argc, char* argv[]) {
+    /*Reader reader("anonyme.log", "court.dot", "08/Sep/2012:11:37:00 +0200" string(), true);
+    reader.readRequests();
+    reader.writeGraph();*/
+
 	if (argc < 2) {
 		return showHelp(argv[0]);
 	}
@@ -67,7 +71,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	Reader reader(inputFile, timeLimit, excludeMeta);
+	Reader reader(inputFile, string(), timeLimit, excludeMeta);
 
 	try {
 		reader.readRequests();
