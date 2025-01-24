@@ -9,7 +9,7 @@ int showHelp(char* exec_path) {
 	std::cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[" << std::endl;
 	std::cerr << "  -h : affiche ce message d'aide" << std::endl;
 
-	return 1
+	return 1;
 }
 
 int main(int argc, char* argv[]) {
@@ -49,7 +49,18 @@ int main(int argc, char* argv[]) {
 				return showHelp(argv[0]);
 			}
 
-			timeLimit = atoi(argv[i+1]);
+			try {
+				timeLimit = std::stoi(argv[i+1]);
+			} catch (const std::invalid_argument&) {
+				std::cerr << "Heure invalide: " << argv[i+1] << std::endl;
+				return showHelp(argv[0]);
+			}
+
+			if (timeLimit < 0 || timeLimit > 23) {
+				std::cerr << "Heure invalide: " << argv[i+1] << std::endl;
+				return showHelp(argv[0]);
+			}
+
 			i+=2;
 		} else {
 			return showHelp(argv[0]);
