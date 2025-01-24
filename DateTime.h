@@ -9,6 +9,10 @@ using namespace std;
 
 typedef long long ll;
 
+/*
+Cette classe permet de représenter une date et une heure, a partir d'une date au format RFC2822.
+*/
+
 class DateTime {
 public:
     DateTime(const string& rfc2822);

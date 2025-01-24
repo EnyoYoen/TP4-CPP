@@ -4,11 +4,13 @@
 #include <sstream>
 
 bool sortHits(const Hits& a, const Hits& b) {
+	// Compare deux hits pour les trier
     return a.second > b.second;
 }
 
 
 Graph::Graph(const string& start, int hour, bool exclude)
+	// Constructeur
     : exclude(exclude), hour(hour), nextVertexId(0) {
         if (!start.empty()) {
             this->start = new DateTime(start);
@@ -18,6 +20,9 @@ Graph::Graph(const string& start, int hour, bool exclude)
     }
 
 void Graph::unmarshalRequest(const string& rawRequest) {
+	// Ajoute une requete au graphe
+
+	// Extrait les informations de la requete
     Request req;
     istringstream iss(rawRequest);
     iss >> req;
@@ -32,6 +37,7 @@ void Graph::unmarshalRequest(const string& rawRequest) {
     const string& source = getSourceFromReferer(req.infos.referer);
     const string& resource = trimOptions(req.resource);
     
+	// Ajoute les sommets et les arcs
     if (vertices.find(source) == vertices.end()) {
         reverseVertices[nextVertexId] = source;
         vertices[source] = nextVertexId++;
@@ -44,12 +50,13 @@ void Graph::unmarshalRequest(const string& rawRequest) {
     int sourceId = vertices[source];
     int resourceId = vertices[resource];
 
-
+	// Ajoute l'arc / edge
     if (edges.find(resourceId) == edges.end()) {
         edges[resourceId] = unordered_map<int, int>();
     }
     unordered_map<int, int> resourceMap = edges[resourceId];
     
+	// Incrémente le nombre de hits
     if (resourceMap.find(sourceId) == resourceMap.end()) {
         resourceMap[sourceId] = 1;
     } else {
@@ -60,6 +67,8 @@ void Graph::unmarshalRequest(const string& rawRequest) {
 }
 
 list<Hits> Graph::getMostHitResources() const {
+	// Retourne les 10 ressources les plus demandées
+
     unordered_map<string, int> hits;
 
     for (const auto& edge : edges) {
@@ -84,6 +93,8 @@ list<Hits> Graph::getMostHitResources() const {
 }
 
 ostream& operator<<(ostream& os, const Graph& graph) {
+	// Permet de generer le graphe au format .dot
+
     os << "digraph {" << endl;
     os << "layout = fdp;" << endl; // Le layout qui marche le mieux pour le rendering
     for (const auto& vertex : graph.vertices) {
@@ -101,12 +112,16 @@ ostream& operator<<(ostream& os, const Graph& graph) {
 
 
 const string Graph::getSourceFromReferer(const string& referer) const {
+	// Extrait la source de la requete referer
+
     size_t last = referer.find_last_of('/');
     string source = referer.substr(last == string::npos ? 0 : last, referer.size() - 1);
     return trimOptions(source);
 }
 
 const string Graph::trimOptions(const string& address) const {
+	// Extrait l'adresse sans les options
+
     size_t option = address.find_first_of('?');
     string trimmedAddress = address.substr(0, option == string::npos ? address.size() : option);
     size_t jsessionid = address.find(";jsessionid");
@@ -115,6 +130,8 @@ const string Graph::trimOptions(const string& address) const {
 }
 
 bool Graph::isExtensionExcluded(const string& resource) const {
+	// Exclut les ressources de type 'image', 'css' et 'js'
+
     bool result = false;
 
     if (exclude) {
@@ -131,6 +148,8 @@ bool Graph::isExtensionExcluded(const string& resource) const {
 }
 
 bool Graph::isTimeExcluded(const DateTime& dt) const {
+	// Exclut les requetes qui ne sont pas dans l'intervalle [heure, heure+1[
+
     bool result = false;
 
     if (start != nullptr) {
