@@ -15,7 +15,7 @@ typedef pair<string, int> Hits;
 
 class Graph {
 public:
-    Graph(const int start = -1, bool exclude = false);
+    Graph(const string& start = string(), int hour = -1, bool exclude = false);
 
     void unmarshalRequest(const string& rawRequest);
 
@@ -31,6 +31,7 @@ private:
 
 
     bool exclude;
+    int hour;
     DateTime *start;
 
     size_t nextVertexId;
