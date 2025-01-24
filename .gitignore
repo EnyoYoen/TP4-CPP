@@ -1,6 +1,7 @@
 *.o
-*.exe
+analog*
 *.dot
 *.svg
 message.txt
 .vscode
+**/results.csv
