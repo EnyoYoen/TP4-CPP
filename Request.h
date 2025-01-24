@@ -4,21 +4,26 @@
 #include <string>
 #include <iostream>
 
+#include "DateTime.h"
+
 using namespace std;
 
 struct Infos {
-    Infos() {}
+    Infos() : dateTime(nullptr) {}
     Infos(const string& ip, const string& userLogName, const string& userName,
           const string& dateTime, const string& method, const string& protocol, 
           int statusCode, int size, const string& referer, const string& userAgent)
-        : ip(ip), userLogName(userLogName), userName(userName), dateTime(dateTime), 
+        : ip(ip), userLogName(userLogName), userName(userName), 
           method(method), protocol(protocol), statusCode(statusCode), 
-          size(size), referer(referer), userAgent(userAgent) {}
+          size(size), referer(referer), userAgent(userAgent) {
+            this->dateTime = new DateTime(dateTime);
+          }
+    ~Infos() {delete dateTime;}
 
     string ip;
     string userLogName;
     string userName;
-    string dateTime; // TODO : data struct to store date and time
+    DateTime *dateTime;
     string method;
     string protocol;
     int statusCode;

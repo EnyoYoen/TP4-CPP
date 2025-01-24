@@ -4,7 +4,9 @@ istream& operator>>(istream& is, Request& req) {
     getline(is, req.infos.ip, ' ');
     getline(is, req.infos.userLogName, ' ');
     getline(is, req.infos.userName, ' ');
-    getline(is, req.infos.dateTime, ']');
+    string dtStr;
+    getline(is, dtStr, ']');
+    req.infos.dateTime = new DateTime(dtStr);
     is.ignore(2); // Ignore the space and the opening quote
     getline(is, req.infos.method, ' ');
     getline(is, req.resource, ' ');
@@ -21,7 +23,7 @@ istream& operator>>(istream& is, Request& req) {
 }
 
 ostream& operator<<(ostream& os, const Request& req) {
-    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
+    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << *req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
     
     return os;
 }

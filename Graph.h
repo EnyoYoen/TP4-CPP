@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include "Request.h"
+#include "DateTime.h"
 
 using namespace std;
 
@@ -25,10 +26,11 @@ public:
 private:
     const string getSourceFromReferer(const string& referer) const;
     bool isExtensionExcluded(const string& resource) const;
+    bool isTimeExcluded(const DateTime& dt) const;
 
 
     bool exclude;
-    string start;
+    DateTime *start;
 
     size_t nextVertexId;
     unordered_map<string, int> vertices;
