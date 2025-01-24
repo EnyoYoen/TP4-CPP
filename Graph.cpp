@@ -85,6 +85,7 @@ list<Hits> Graph::getMostHitResources() const {
 
 ostream& operator<<(ostream& os, const Graph& graph) {
     os << "digraph {" << endl;
+    os << "layout = fdp;" << endl; // Le layout qui marche le mieux pour le rendering
     for (const auto& vertex : graph.vertices) {
         os << "node" << vertex.second << " [label=\"" << vertex.first << "\"];" << endl;
     }
