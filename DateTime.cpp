@@ -9,7 +9,11 @@ DateTime::DateTime(const string& rfc2822) {
     is.ignore(1); // Ignore the slash
     string monthStr;
     getline(is, monthStr, '/');
-    month = monthStrToInt.at(monthStr);
+    if (monthStrToInt.find(monthStr) == monthStrToInt.end()) {
+        month = 0;
+    } else {
+        month = monthStrToInt.at(monthStr);
+    }
     is.ignore(1); // Ignore the slash
     is >> year;
     is.ignore(1); // Ignore the colon

@@ -22,7 +22,7 @@ void Graph::unmarshalRequest(const string& rawRequest) {
     istringstream iss(rawRequest);
     iss >> req;
 
-    if (isExtensionExcluded(req.resource) || isTimeExcluded(*req.infos.dateTime)) {
+    if (isExtensionExcluded(req.resource) || isTimeExcluded(*req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode)) {
         return;
     }
 
@@ -31,7 +31,7 @@ void Graph::unmarshalRequest(const string& rawRequest) {
 
     const string& source = getSourceFromReferer(req.infos.referer);
     const string& resource = trimOptions(req.resource);
-    
+
     if (vertices.find(source) == vertices.end()) {
         reverseVertices[nextVertexId] = source;
         vertices[source] = nextVertexId++;
@@ -87,7 +87,7 @@ ostream& operator<<(ostream& os, const Graph& graph) {
     os << "digraph {" << endl;
     os << "layout = fdp;" << endl; // Le layout qui marche le mieux pour le rendering
     for (const auto& vertex : graph.vertices) {
-        os << "node" << vertex.second << " [label=\"" << vertex.first << "\"];" << endl;
+        os << "node" << vertex.second << " [label=\"" << (vertex.first.empty() ? "-" : vertex.first) << "\"];" << endl;
     }
     for (const auto& edge : graph.edges) {
         for (const auto& edge2 : edge.second) {
@@ -110,7 +110,7 @@ const string Graph::trimOptions(const string& address) const {
     size_t option = address.find_first_of('?');
     string trimmedAddress = address.substr(0, option == string::npos ? address.size() : option);
     size_t jsessionid = address.find(";jsessionid");
-    return trimmedAddress.substr(0, jsessionid == string::npos ? trimmedAddress.size() : jsessionid);
+    return trimmedAddress.substr(0, (jsessionid == string::npos) != 0 ? trimmedAddress.size() : jsessionid);
     
 }
 
@@ -145,4 +145,8 @@ bool Graph::isTimeExcluded(const DateTime& dt) const {
     }
 
     return result;
+}
+
+bool Graph::isStatusCodeCorrect(const int code) const {
+    return !(code >= 200 && code < 400);
 }

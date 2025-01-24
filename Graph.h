@@ -28,6 +28,7 @@ private:
     const string getSourceFromReferer(const string& referer) const;
     bool isExtensionExcluded(const string& resource) const;
     bool isTimeExcluded(const DateTime& dt) const;
+    bool isStatusCodeCorrect(const int code) const;
 
 
     bool exclude;

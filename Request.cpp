@@ -14,8 +14,14 @@ istream& operator>>(istream& is, Request& req) {
     getline(is, req.infos.protocol, '"');
     is.ignore(1); // Ignore the space
     is >> req.infos.statusCode;
-    is >> req.infos.size;
-    is.ignore(2); // Ignore the space and the opening quote
+    is.ignore(1); // Ignore the space
+    string size;
+    getline(is, size, ' ');
+    if (size == "-" || size.empty()) {
+        size = "0";
+    }
+    req.infos.size = stoi(size);
+    is.ignore(1); // Ignore the space and the opening quote
     getline(is, req.infos.referer, '"');
     is.ignore(2); // Ignore the space and the opening quote
     getline(is, req.infos.userAgent, '"');
@@ -24,7 +30,7 @@ istream& operator>>(istream& is, Request& req) {
 }
 
 ostream& operator<<(ostream& os, const Request& req) {
-    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << *req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
+    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << *req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\" " << req.infos.referer;
     
     return os;
 }
