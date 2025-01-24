@@ -30,18 +30,19 @@ void Graph::unmarshalRequest(const string& rawRequest) {
 
 
     const string& source = getSourceFromReferer(req.infos.referer);
+    const string& resource = trimOptions(req.resource);
     
     if (vertices.find(source) == vertices.end()) {
         reverseVertices[nextVertexId] = source;
         vertices[source] = nextVertexId++;
     }
-    if (vertices.find(req.resource) == vertices.end()) {
-        reverseVertices[nextVertexId] = req.resource;
-        vertices[req.resource] = nextVertexId++;
+    if (vertices.find(resource) == vertices.end()) {
+        reverseVertices[nextVertexId] = resource;
+        vertices[resource] = nextVertexId++;
     }
 
     int sourceId = vertices[source];
-    int resourceId = vertices[req.resource];
+    int resourceId = vertices[resource];
 
 
     if (edges.find(resourceId) == edges.end()) {
@@ -100,16 +101,28 @@ ostream& operator<<(ostream& os, const Graph& graph) {
 
 const string Graph::getSourceFromReferer(const string& referer) const {
     size_t last = referer.find_last_of('/');
-    return referer.substr(last == string::npos ? 0 : last, referer.size() - 1);
+    string source = referer.substr(last == string::npos ? 0 : last, referer.size() - 1);
+    return trimOptions(source);
+}
+
+const string Graph::trimOptions(const string& address) const {
+    size_t option = address.find_first_of('?');
+    string trimmedAddress = address.substr(0, option == string::npos ? address.size() : option);
+    size_t jsessionid = address.find(";jsessionid");
+    return trimmedAddress.substr(0, jsessionid == string::npos ? trimmedAddress.size() : jsessionid);
+    
 }
 
 bool Graph::isExtensionExcluded(const string& resource) const {
     bool result = false;
 
     if (exclude) {
-        const string extension = resource.substr(resource.find_last_of('.'));
-        if (extension == ".css" || extension == ".js" || extension == ".png" || extension == ".jpg" || extension == ".gif") {
-            return true;
+        size_t last = resource.find_last_of('.');
+        if (last != string::npos) {
+            const string extension = resource.substr(resource.find_last_of('.'));
+            if (extension == ".css" || extension == ".js" || extension == ".png" || extension == ".jpg" || extension == ".gif") {
+                return true;
+            }
         }
     }
 
@@ -122,7 +135,6 @@ bool Graph::isTimeExcluded(const DateTime& dt) const {
     if (start != nullptr) {
         ll diff = dt.secondsBetween(*start);
         if (diff < 0 || diff >= 3600) {
-            cout << "Diff: " << diff << endl;
             return true;
         }
     }

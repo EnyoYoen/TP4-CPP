@@ -24,6 +24,7 @@ public:
     friend ostream& operator<<(ostream& os, const Graph& graph);
 
 private:
+    const string trimOptions(const string& address) const;
     const string getSourceFromReferer(const string& referer) const;
     bool isExtensionExcluded(const string& resource) const;
     bool isTimeExcluded(const DateTime& dt) const;
