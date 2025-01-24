@@ -11,7 +11,6 @@ typedef long long ll;
 
 class DateTime {
 public:
-    DateTime() : year(0), month(0), day(0), hour(0), minute(0), second(0) {}
     DateTime(const string& rfc2822);
 
     ll secondsBetween(const DateTime& dt) const;

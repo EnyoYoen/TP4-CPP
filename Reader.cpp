@@ -21,8 +21,15 @@ void Reader::readRequests() {
 
 void Reader::writeGraph() {
     list<Hits> hits = graph.getMostHitResources();
+
+    int count = 0;
     for (const auto& hit : hits) {
+        count++;
         cout << hit.first << " (" << hit.second << " hits)" << endl;
+
+        if (count == 10) {
+            break;
+        }
     }
 
     if (!out.empty()) {

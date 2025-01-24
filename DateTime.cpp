@@ -1,13 +1,14 @@
 #include "DateTime.h"
 
 #include <sstream>
+#include <iostream>
 
 DateTime::DateTime(const string& rfc2822) {
     istringstream is(rfc2822);
     is >> day;
     is.ignore(1); // Ignore the slash
     string monthStr;
-    is >> monthStr;
+    getline(is, monthStr, '/');
     month = monthStrToInt.at(monthStr);
     is.ignore(1); // Ignore the slash
     is >> year;
@@ -32,4 +33,6 @@ ll DateTime::secondsBetween(const DateTime& dt) const {
 
 ostream& operator<<(ostream& os, const DateTime& dt) {
     os << dt.day << "/" << dt.month << "/" << dt.year << ":" << dt.hour << ":" << dt.minute << ":" << dt.second;
+
+    return os;
 }

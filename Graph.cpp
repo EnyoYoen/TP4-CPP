@@ -120,7 +120,9 @@ bool Graph::isTimeExcluded(const DateTime& dt) const {
     bool result = false;
 
     if (start != nullptr) {
-        if (0 <= dt.secondsBetween(*start) < 3600) {
+        ll diff = dt.secondsBetween(*start);
+        if (diff < 0 || diff >= 3600) {
+            cout << "Diff: " << diff << endl;
             return true;
         }
     }

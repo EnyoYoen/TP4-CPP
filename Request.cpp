@@ -4,6 +4,7 @@ istream& operator>>(istream& is, Request& req) {
     getline(is, req.infos.ip, ' ');
     getline(is, req.infos.userLogName, ' ');
     getline(is, req.infos.userName, ' ');
+    is.ignore(1); // Ignore the opening bracket
     string dtStr;
     getline(is, dtStr, ']');
     req.infos.dateTime = new DateTime(dtStr);
