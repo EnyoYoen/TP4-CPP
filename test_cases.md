@@ -15,6 +15,7 @@
 | 11  | Fichier log absent                   | cerr => message d'erreur                                                                                         |
 | 12  | -t SANS HEURE                        | cerr => message d'erreur                                                                                         |
 | 13  | FICHIER LOG VIDE                     | cerr => message d'avertissement                                                                                  |
+| 14  | test code retour du programme        |                                                                                                                  |
 ## TODO
 
 - test 3 : comment définit-on les images, CSS, JS ? 
