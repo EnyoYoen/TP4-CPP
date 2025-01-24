@@ -139,5 +139,9 @@ bool Graph::isTimeExcluded(const DateTime& dt) const {
         }
     }
 
+    if (hour != -1 && dt.getHour() != hour) {
+        return true;
+    }
+
     return result;
 }

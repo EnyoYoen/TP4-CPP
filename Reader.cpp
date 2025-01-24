@@ -2,8 +2,8 @@
 
 #include <fstream>
 
-Reader::Reader(const string& filename, const int start, bool exclude)
-    : graph(start, exclude), filename(filename) {}
+Reader::Reader(const string& filename, const string& start, int hour, bool exclude)
+    : graph(start, hour, exclude), filename(filename) {}
 
 void Reader::readRequests() {
     ifstream file(filename);
