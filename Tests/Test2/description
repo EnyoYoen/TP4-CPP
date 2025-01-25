@@ -1,1 +1,2 @@
-Essai de test de recopie d'entrée standard
+Test pour vérifier la génération du fichier GraphViz.
+Etant donné que nous utilisons des structures non ordonnées, le fichier GraphViz n'est pas dans le même ordre entre deux exécutions.

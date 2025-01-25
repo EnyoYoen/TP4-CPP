@@ -1,1 +1,1 @@
-cat 
+./../../bin/analog -g output.dot test2.log
