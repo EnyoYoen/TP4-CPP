@@ -111,7 +111,7 @@ ostream &operator<<(ostream &os, const Graph &graph)
 	os << "layout = fdp;" << endl; // Le layout qui marche le mieux pour le rendering
 	for (const Vertex &vertex : graph.vertices)
 	{
-		os << "node" << vertex.second << " [label=\"" << (vertex.first.empty() ? "-" : vertex.first) << "\"];" << endl;
+		os << "node" << vertex.second << " [label=\"" << vertex.first << "\"];" << endl;
 	}
 	for (const EdgeMap &edge : graph.edges)
 	{
@@ -130,7 +130,7 @@ const string Graph::getSourceFromReferer(const string &referer) const
 	// Extrait la source de la requete referer
 
 	size_t last = referer.find_last_of('/');
-	string source = referer.substr(last == string::npos ? 0 : last, referer.size() - 1);
+	string source = referer.substr(last == string::npos ? 0 : last, referer.size());
 	return trimOptions(source);
 }
 
