@@ -1,5 +1,7 @@
 #include "Request.h"
 
+#include <sstream>
+
 istream& operator>>(istream& is, Request& req) {
 	// Permet de parser les informations pour une ligne de log
     getline(is, req.infos.ip, ' ');
@@ -8,7 +10,8 @@ istream& operator>>(istream& is, Request& req) {
     is.ignore(1); // Ignore the opening bracket
     string dtStr;
     getline(is, dtStr, ']');
-    req.infos.dateTime = new DateTime(dtStr);
+    istringstream dateStream(dtStr);
+    dateStream >> req.infos.dateTime;
     is.ignore(2); // Ignore the space and the opening quote
     getline(is, req.infos.method, ' ');
     getline(is, req.resource, ' ');
@@ -33,7 +36,7 @@ istream& operator>>(istream& is, Request& req) {
 ostream& operator<<(ostream& os, const Request& req) {
 	// Permet d'afficher les informations récupérée
 	// Utilisée pour le debug
-    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << *req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
+    os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
 
     return os;
 }

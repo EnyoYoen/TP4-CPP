@@ -9,18 +9,11 @@ bool sortHits(const Hits &a, const Hits &b)
 	return a.second > b.second;
 }
 
-Graph::Graph(const string &start, int hour, bool exclude)
+Graph::Graph(int hour, bool exclude)
 	// Constructeur
 	: exclude(exclude), hour(hour), nextVertexId(0)
 {
-	if (!start.empty())
-	{
-		this->start = new DateTime(start);
-	}
-	else
-	{
-		this->start = nullptr;
-	}
+
 }
 
 void Graph::unmarshalRequest(const string &rawRequest)
@@ -32,7 +25,7 @@ void Graph::unmarshalRequest(const string &rawRequest)
 	istringstream iss(rawRequest);
 	iss >> req;
 
-	if (isExtensionExcluded(req.resource) || isTimeExcluded(*req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
+	if (isExtensionExcluded(req.resource) || isTimeExcluded(req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
 	{
 		return;
 	}
@@ -179,18 +172,9 @@ bool Graph::isTimeExcluded(const DateTime &dt) const
 
 	bool result = false;
 
-	if (start != nullptr)
-	{
-		ll diff = dt.secondsBetween(*start);
-		if (diff < 0 || diff >= 3600)
-		{
-			return true;
-		}
-	}
-
 	if (hour != -1 && dt.getHour() != hour)
 	{
-		return true;
+		result = true;
 	}
 
 	return result;

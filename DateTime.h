@@ -15,12 +15,13 @@ Cette classe permet de représenter une date et une heure, a partir d'une date a
 
 class DateTime {
 public:
-    DateTime(const string& rfc2822);
+    DateTime() {};
 
     ll secondsBetween(const DateTime& dt) const;
 
     int getHour() const { return hour; }
 
+    friend istream& operator>>(istream& is, DateTime& dt);
     friend ostream& operator<<(ostream& os, const DateTime& dt);
 
 private:
@@ -31,20 +32,7 @@ private:
     int minute;
     int second;
 
-    const unordered_map<string, int> monthStrToInt = {
-        {"Jan", 1},
-        {"Feb", 2},
-        {"Mar", 3},
-        {"Apr", 4},
-        {"May", 5},
-        {"Jun", 6},
-        {"Jul", 7},
-        {"Aug", 8},
-        {"Sep", 9},
-        {"Oct", 10},
-        {"Nov", 11},
-        {"Dec", 12}
-    };
+    static const unordered_map<string, int> monthStrToInt;
 };
 
 

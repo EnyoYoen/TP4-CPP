@@ -15,14 +15,14 @@ using namespace std;
 Cette classe permet de représenter un graphe orienté, et de l'exporter au format .dot.
 */
 
-typedef pair<string, int> Hits;
-typedef pair<int, int> Edge;
-typedef pair<string, int> Vertex;
-typedef pair<int, unordered_map<int, int>> EdgeMap;
+typedef pair<const string, int> Hits;
+typedef pair<const int, int> Edge;
+typedef pair<const string, int> Vertex;
+typedef pair<const int, unordered_map<int, int>> EdgeMap;
 
 class Graph {
 public:
-    Graph(const string& start = string(), int hour = -1, bool exclude = false);
+    Graph(int hour = -1, bool exclude = false);
 
     void unmarshalRequest(const string& rawRequest);
 
@@ -40,7 +40,6 @@ private:
 
     bool exclude;
     int hour;
-    DateTime *start;
 
     size_t nextVertexId;
     unordered_map<string, int> vertices;

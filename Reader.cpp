@@ -3,7 +3,7 @@
 #include <fstream>
 
 Reader::Reader(const string &filename, const string &start, int hour, bool exclude)
-	: graph(start, hour, exclude), filename(filename) {} // Constructeur
+	: graph(hour, exclude), filename(filename) {} // Constructeur
 
 
 void Reader::readRequests()
