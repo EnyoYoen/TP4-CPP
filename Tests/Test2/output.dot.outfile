@@ -1,0 +1,5 @@
+digraph {
+node0 [label="/SiteWebIF/Intranet-etudiant.php"];
+node1 [label="/stages/style_pfe.css"];
+node0 -> node1 [label="1"];
+}
