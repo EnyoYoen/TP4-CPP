@@ -1,2 +1,2 @@
 Test pour vérifier la génération du fichier GraphViz.
-Etant donné que nous utilisons des structures non ordonnées, le fichier GraphViz n'est pas dans le même ordre entre deux exécutions.
+Etant donné que nous utilisons des structures non ordonnées, le fichier GraphViz n'est pas dans le même ordre entre deux exécutions. Donc le test consiste en une unique requête.
