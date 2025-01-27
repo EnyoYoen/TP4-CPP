@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iostream>
 
-const unordered_map<string, int> DateTime::monthStrToInt = {
+const unordered_map<string, i8> DateTime::monthStrToInt = {
     {"Jan", 1},
     {"Feb", 2},
     {"Mar", 3},

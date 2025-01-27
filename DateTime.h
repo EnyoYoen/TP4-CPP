@@ -13,6 +13,8 @@ typedef long long ll;
 Cette classe permet de représenter une date et une heure, a partir d'une date au format RFC2822.
 */
 
+typedef char i8;
+
 class DateTime {
 public:
     DateTime() {};
@@ -26,13 +28,13 @@ public:
 
 private:
     ll year;
-    int month;
-    int day;
-    int hour;
-    int minute;
-    int second;
+    i8 month;
+    i8 day;
+    i8 hour;
+    i8 minute;
+    i8 second;
 
-    static const unordered_map<string, int> monthStrToInt;
+    static const unordered_map<string, i8> monthStrToInt;
 };
 
 
