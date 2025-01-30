@@ -9,11 +9,18 @@ bool sortHits(const Hits &a, const Hits &b)
 	return a.second > b.second;
 }
 
-Graph::Graph(int hour, bool exclude)
+Graph::Graph(const string& start, int hour, bool exclude)
 	// Constructeur
 	: exclude(exclude), hour(hour), nextVertexId(0)
 {
-
+	if (!start.empty())
+	{
+		istringstream iss(start);
+		iss >> this->start;
+		startSet = true;
+	} else {
+		startSet = false;
+	}
 }
 
 void Graph::unmarshalRequest(const string &rawRequest)
@@ -175,6 +182,12 @@ bool Graph::isTimeExcluded(const DateTime &dt) const
 	if (hour != -1 && dt.getHour() != hour)
 	{
 		result = true;
+	}
+
+	if (startSet)
+	{
+		ll seconds = dt.secondsBetween(start);
+		result = seconds < 0 || seconds > 3600;
 	}
 
 	return result;

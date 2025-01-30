@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iostream>
 
-const unordered_map<string, i8> DateTime::monthStrToInt = {
+const unordered_map<string, i16> DateTime::monthStrToInt = {
     {"Jan", 1},
     {"Feb", 2},
     {"Mar", 3},
@@ -21,13 +21,43 @@ const unordered_map<string, i8> DateTime::monthStrToInt = {
 ll DateTime::secondsBetween(const DateTime& dt) const {
 	// Retourne le nombre de secondes entre deux dates
     ll yearDiff = this->year - dt.year;
-    int monthDiff = this->month - dt.month;
-    int dayDiff = this->day - dt.day;
-    int hourDiff = this->hour - dt.hour;
-    int minuteDiff = this->minute - dt.minute;
-    int secondDiff = this->second - dt.second;
+    ll monthDiff = this->month - dt.month;
+    ll dayDiff = this->day - dt.day;
+    ll hourDiff = this->hour - dt.hour;
+    ll minuteDiff = this->minute - dt.minute;
+    ll secondDiff = this->second - dt.second;
 
     return yearDiff * 31536000 + monthDiff * 2592000 + dayDiff * 86400 + hourDiff * 3600 + minuteDiff * 60 + secondDiff;
+}
+
+bool isDigit(char c) {
+    return isdigit(static_cast<unsigned char>(c));
+}
+
+bool DateTime::isDateTimeCorrect(const string& clf) {
+    // Vérifie si la chaîne est au format CLF
+
+    if (clf.size() != 20) return false;
+
+    if (!isDigit(clf[0]) || !isDigit(clf[1])) return false;
+    if (clf[2] != '/') return false;
+
+    string monthStr = clf.substr(3, 3);
+    if (monthStrToInt.find(monthStr) == monthStrToInt.end()) return false;
+    if (clf[6] != '/') return false;
+
+    if (!isDigit(clf[7]) || !isDigit(clf[8]) || !isDigit(clf[9]) || !isDigit(clf[10])) return false;
+    if (clf[11] != ':') return false;
+
+    if (!isDigit(clf[12]) || !isDigit(clf[13])) return false;
+    if (clf[14] != ':') return false;
+
+    if (!isDigit(clf[15]) || !isDigit(clf[16])) return false;
+    if (clf[17] != ':') return false;
+
+    if (!isDigit(clf[18]) || !isDigit(clf[19])) return false;
+
+    return true;
 }
 
 istream& operator>>(istream& is, DateTime& dt) {
@@ -41,7 +71,6 @@ istream& operator>>(istream& is, DateTime& dt) {
     } else {
         dt.month = dt.monthStrToInt.at(monthStr);
     }
-    is.ignore(1); // Ignore the slash
     is >> dt.year;
     is.ignore(1); // Ignore the colon
     is >> dt.hour;

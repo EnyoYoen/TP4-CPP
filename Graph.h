@@ -22,7 +22,7 @@ typedef pair<const int, unordered_map<int, int>> EdgeMap;
 
 class Graph {
 public:
-    Graph(int hour = -1, bool exclude = false);
+    Graph(const string& start = string(), int hour = -1, bool exclude = false);
 
     void unmarshalRequest(const string& rawRequest);
 
@@ -38,8 +38,10 @@ private:
     bool isStatusCodeCorrect(const int code) const;
 
 
+    bool startSet;
     bool exclude;
     int hour;
+    DateTime start;
 
     size_t nextVertexId;
     unordered_map<string, int> vertices;

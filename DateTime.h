@@ -8,12 +8,11 @@
 using namespace std;
 
 typedef long long ll;
+typedef short i16;
 
 /*
 Cette classe permet de représenter une date et une heure, a partir d'une date au format RFC2822.
 */
-
-typedef char i8;
 
 class DateTime {
 public:
@@ -23,18 +22,20 @@ public:
 
     int getHour() const { return hour; }
 
+    static bool isDateTimeCorrect(const string& clf);
+
     friend istream& operator>>(istream& is, DateTime& dt);
     friend ostream& operator<<(ostream& os, const DateTime& dt);
 
 private:
     ll year;
-    i8 month;
-    i8 day;
-    i8 hour;
-    i8 minute;
-    i8 second;
+    i16 month;
+    i16 day;
+    i16 hour;
+    i16 minute;
+    i16 second;
 
-    static const unordered_map<string, i8> monthStrToInt;
+    static const unordered_map<string, i16> monthStrToInt;
 };
 
 
