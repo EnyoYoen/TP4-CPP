@@ -40,12 +40,12 @@ private:
     bool isRefererCorrect(const string &referer) const;
     bool isRessourceCorrect(const string &ressource) const;
 
+    string fromReferer;
+    string toRessource;
     bool startSet;
     bool exclude;
     int hour;
     DateTime start;
-    string fromReferer;
-    string toRessource;
 
     size_t nextVertexId;
     unordered_map<string, int> vertices;
