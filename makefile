@@ -7,7 +7,14 @@ OBJS = $(addprefix bin/, $(notdir $(SRCS:.cpp=.o)))
 TARGET = bin/analog
 
 # Create the bin directory if it doesn't exist
-$(shell if not exist bin mkdir bin)
+# On Windows, remove the -p option for mkdir
+ifeq ($(OS),Windows_NT)
+	MKDIR = mkdir bin
+else
+	MKDIR = mkdir -p bin
+endif
+
+$(shell $(MKDIR))
 
 all: $(TARGET)
 
