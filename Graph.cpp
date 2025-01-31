@@ -9,17 +9,17 @@ bool sortHits(const Hits &a, const Hits &b)
 	return a.second > b.second;
 }
 
-Graph::Graph(const string &start, int hour, bool exclude)
+Graph::Graph(const string& start, int hour, bool exclude)
 	// Constructeur
 	: exclude(exclude), hour(hour), nextVertexId(0)
 {
 	if (!start.empty())
 	{
-		this->start = new DateTime(start);
-	}
-	else
-	{
-		this->start = nullptr;
+		istringstream iss(start);
+		iss >> this->start;
+		startSet = true;
+	} else {
+		startSet = false;
 	}
 }
 
@@ -32,7 +32,7 @@ void Graph::unmarshalRequest(const string &rawRequest)
 	istringstream iss(rawRequest);
 	iss >> req;
 
-	if (isExtensionExcluded(req.resource) || isTimeExcluded(*req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
+	if (isExtensionExcluded(req.resource) || isTimeExcluded(req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
 	{
 		return;
 	}
@@ -118,7 +118,7 @@ ostream &operator<<(ostream &os, const Graph &graph)
 	os << "layout = fdp;" << endl; // Le layout qui marche le mieux pour le rendering
 	for (const Vertex &vertex : graph.vertices)
 	{
-		os << "node" << vertex.second << " [label=\"" << (vertex.first.empty() ? "-" : vertex.first) << "\"];" << endl;
+		os << "node" << vertex.second << " [label=\"" << vertex.first << "\"];" << endl;
 	}
 	for (const EdgeMap &edge : graph.edges)
 	{
@@ -137,7 +137,7 @@ const string Graph::getSourceFromReferer(const string &referer) const
 	// Extrait la source de la requete referer
 
 	size_t last = referer.find_last_of('/');
-	string source = referer.substr(last == string::npos ? 0 : last, referer.size() - 1);
+	string source = referer.substr(last == string::npos ? 0 : last, referer.size());
 	return trimOptions(source);
 }
 
@@ -179,18 +179,15 @@ bool Graph::isTimeExcluded(const DateTime &dt) const
 
 	bool result = false;
 
-	if (start != nullptr)
-	{
-		ll diff = dt.secondsBetween(*start);
-		if (diff < 0 || diff >= 3600)
-		{
-			return true;
-		}
-	}
-
 	if (hour != -1 && dt.getHour() != hour)
 	{
-		return true;
+		result = true;
+	}
+
+	if (startSet)
+	{
+		ll seconds = dt.secondsBetween(start);
+		result = seconds < 0 || seconds > 3600;
 	}
 
 	return result;

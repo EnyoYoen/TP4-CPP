@@ -1,1 +1,1 @@
-../../analog.exe -t -1 fake.log || ../../analog.exe -t 24 fake.log
+./../../bin/analog -t -1 fake.log || ./../../bin/analog -t 24 fake.log

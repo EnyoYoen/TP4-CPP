@@ -1,15 +1,19 @@
 #include "Reader.h"
+#include "DateTime.h"
+
 #include <string.h>
+
+using namespace std;
 
 int showHelp(char *exec_path)
 {
 	// Affiche l'aide
-	std::cerr << "Usage: " << exec_path << " [options] <nomfichier.log>" << std::endl;
-	std::cerr << "Options:" << std::endl;
-	std::cerr << "  -g <nomfichier.dot> : génère un fichier au format GraphViz" << std::endl;
-	std::cerr << "  -e : exclut les documents de type 'image', 'css' et 'js'" << std::endl;
-	std::cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[" << std::endl;
-	std::cerr << "  -h : affiche ce message d'aide" << std::endl;
+	cerr << "Usage: " << exec_path << " [options] <nomfichier.log>" << endl;
+	cerr << "Options:" << endl;
+	cerr << "  -g <nomfichier.dot> : génère un fichier au format GraphViz" << endl;
+	cerr << "  -e : exclut les documents de type 'image', 'css' et 'js'" << endl;
+	cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[" << endl;
+	cerr << "  -h : affiche ce message d'aide" << endl;
 
 	return 1;
 }
@@ -25,6 +29,7 @@ int main(int argc, char *argv[])
 	bool excludeMeta = false;
 
 	int timeLimit = -1;
+	string timeLimitStr = string();
 
 	bool makeGraph = false;
 	string graphOutput = string();
@@ -65,19 +70,32 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				timeLimit = std::stoi(argv[i + 1]);
+				timeLimit = stoi(argv[i + 1]);
 			}
-			catch (const std::invalid_argument &)
+			catch (const invalid_argument &)
 			{
-				std::cerr << "Heure invalide: " << argv[i + 1] << std::endl;
+				cerr << "Heure invalide: " << argv[i + 1] << endl;
 				return showHelp(argv[0]);
 			}
 
 			if (timeLimit < 0 || timeLimit > 23)
 			{
-				std::cerr << "Heure invalide: " << argv[i + 1] << std::endl;
+				cerr << "Heure invalide: " << argv[i + 1] << endl;
 				return showHelp(argv[0]);
 			}
+
+			i += 2;
+		}
+		else if (strncmp(argv[i], "-d", 3) == 0)
+		{
+			const char* clf = argv[i + 1];
+			if (!DateTime::isDateTimeCorrect(string(clf)))
+			{
+				cerr << "Date invalide: " << clf << endl;
+				return showHelp(argv[0]);
+			}
+
+			timeLimitStr = clf;
 
 			i += 2;
 		}
@@ -94,16 +112,16 @@ int main(int argc, char *argv[])
 	}
 	string inputFile = argv[argc - 1];
 
-	Reader reader(inputFile, string(), timeLimit, excludeMeta);
+	Reader reader(inputFile, timeLimitStr, timeLimit, excludeMeta);
 
 	try
 	{
 		reader.readRequests();
 		reader.writeGraph(graphOutput);
 	}
-	catch (const std::runtime_error &e)
+	catch (const runtime_error &e)
 	{
-		std::cerr << "Runtime error: " << e.what() << std::endl;
+		cerr << "Runtime error: " << e.what() << endl;
 		return showHelp(argv[0]);
 	}
 
