@@ -12,7 +12,8 @@ int showHelp(char *exec_path)
 	cerr << "Options:" << endl;
 	cerr << "  -g <nomfichier.dot> : génère un fichier au format GraphViz" << endl;
 	cerr << "  -e : exclut les documents de type 'image', 'css' et 'js'" << endl;
-	cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[" << endl;
+	cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << endl;
+	cerr << "  -d <CLF> : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << endl;
 	cerr << "  -h : affiche ce message d'aide" << endl;
 
 	return 1;
