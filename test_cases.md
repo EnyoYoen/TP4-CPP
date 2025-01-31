@@ -16,7 +16,3 @@
 | 12  | -t SANS HEURE                          | cerr => message d'erreur                                                                                           |
 | 13  | FICHIER LOG VIDE                       | cerr => message d'avertissement                                                                                    |
 | 14  | test code retour du programme          |                                                                                                                    |
-
-## TODO
-
-- tester éventuellement les fichier graphes
