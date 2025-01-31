@@ -133,7 +133,7 @@ ostream &operator<<(ostream &os, const Graph &graph)
 	{
 		for (const Edge &edge2 : edge.second)
 		{
-			os << "node" << edge.first << " -> node" << edge2.first << " [label=\"" << edge2.second << "\"];" << endl;
+			os << "node" << edge2.first << " -> node" << edge.first << " [label=\"" << edge2.second << "\"];" << endl;
 		}
 	}
 	os << "}" << endl;
