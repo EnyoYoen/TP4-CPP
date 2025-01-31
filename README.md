@@ -47,5 +47,3 @@ Afin de générer le graphe, nous avons utilisé un [Google Colab](https://colab
 ### Vérification des requêtes
 
 Nous avons fait des vérifications lors du parsing de chaque ligne du fichier log (dans les fichiers Request et DateTime) afin de détecter des lignes invalides, en levant des exceptions. Si une ligne du fichier log est invalide, un message d'erreur est affiché sur `cerr` mais l'execution du programme continue en ignorant la requête.
-
-![Alt Text](https://static.printler.com/cache/c/4/1/7/d/c/c417dc9c0acfba8b61c6a40e81636b953e9a5566.jpg)
