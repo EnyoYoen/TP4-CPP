@@ -6,3 +6,4 @@ message.txt
 **/results.csv
 bin/
 bin/*
+-p
