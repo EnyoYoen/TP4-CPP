@@ -4,4 +4,6 @@
 message.txt
 .vscode
 **/results.csv
+bin/
 bin/*
+-p
