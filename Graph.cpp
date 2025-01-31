@@ -29,54 +29,61 @@ void Graph::unmarshalRequest(const string &rawRequest)
 {
 	// Ajoute une requete au graphe
 
-	// Extrait les informations de la requete
-	Request req;
-	istringstream iss(rawRequest);
-	iss >> req;
-
-	if (isExtensionExcluded(req.resource) || isTimeExcluded(req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
+	try
 	{
-		return;
+		// Extrait les informations de la requete
+		Request req;
+		istringstream iss(rawRequest);
+		iss >> req;
+
+		if (isExtensionExcluded(req.resource) || isTimeExcluded(req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
+		{
+			return;
+		}
+
+		requests[req.resource] = req.infos;
+
+		const string &source = getSourceFromReferer(req.infos.referer);
+		const string &resource = trimOptions(req.resource);
+
+		// Ajoute les sommets et les arcs
+		if (vertices.find(source) == vertices.end())
+		{
+			reverseVertices[nextVertexId] = source;
+			vertices[source] = nextVertexId++;
+		}
+		if (vertices.find(resource) == vertices.end())
+		{
+			reverseVertices[nextVertexId] = resource;
+			vertices[resource] = nextVertexId++;
+		}
+
+		int sourceId = vertices[source];
+		int resourceId = vertices[resource];
+
+		// Ajoute l'arc / edge
+		if (edges.find(resourceId) == edges.end())
+		{
+			edges[resourceId] = unordered_map<int, int>();
+		}
+		unordered_map<int, int> resourceMap = edges[resourceId];
+
+		// Incrémente le nombre de hits
+		if (resourceMap.find(sourceId) == resourceMap.end())
+		{
+			resourceMap[sourceId] = 1;
+		}
+		else
+		{
+			resourceMap[sourceId] += 1;
+		}
+
+		edges[resourceId] = resourceMap;
 	}
-
-	requests[req.resource] = req.infos;
-
-	const string &source = getSourceFromReferer(req.infos.referer);
-	const string &resource = trimOptions(req.resource);
-
-	// Ajoute les sommets et les arcs
-	if (vertices.find(source) == vertices.end())
+	catch (const runtime_error &e)
 	{
-		reverseVertices[nextVertexId] = source;
-		vertices[source] = nextVertexId++;
+		cerr << "Invalid Request (may be incorrect: " << e.what() << "): " << rawRequest << endl;
 	}
-	if (vertices.find(resource) == vertices.end())
-	{
-		reverseVertices[nextVertexId] = resource;
-		vertices[resource] = nextVertexId++;
-	}
-
-	int sourceId = vertices[source];
-	int resourceId = vertices[resource];
-
-	// Ajoute l'arc / edge
-	if (edges.find(resourceId) == edges.end())
-	{
-		edges[resourceId] = unordered_map<int, int>();
-	}
-	unordered_map<int, int> resourceMap = edges[resourceId];
-
-	// Incrémente le nombre de hits
-	if (resourceMap.find(sourceId) == resourceMap.end())
-	{
-		resourceMap[sourceId] = 1;
-	}
-	else
-	{
-		resourceMap[sourceId] += 1;
-	}
-
-	edges[resourceId] = resourceMap;
 }
 
 list<Hits> Graph::getMostHitResources() const

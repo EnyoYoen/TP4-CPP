@@ -14,18 +14,20 @@ typedef short i16;
 Cette classe permet de représenter une date et une heure, a partir d'une date au format RFC2822.
 */
 
-class DateTime {
+class DateTime
+{
 public:
     DateTime() {};
 
-    ll secondsBetween(const DateTime& dt) const;
+    ll secondsBetween(const DateTime &dt) const;
 
     int getHour() const { return hour; }
 
-    static bool isDateTimeCorrect(const string& clf);
+    static bool isDateTimeCorrect(const string &clf);
+    static bool isFullDateTimeCorrect(const string &clf);
 
-    friend istream& operator>>(istream& is, DateTime& dt);
-    friend ostream& operator<<(ostream& os, const DateTime& dt);
+    friend istream &operator>>(istream &is, DateTime &dt);
+    friend ostream &operator<<(ostream &os, const DateTime &dt);
 
 private:
     ll year;
@@ -37,6 +39,5 @@ private:
 
     static const unordered_map<string, i16> monthStrToInt;
 };
-
 
 #endif // DATETIME_H
