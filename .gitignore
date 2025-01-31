@@ -1,8 +1,8 @@
 *.o
-analog*
 *.dot
 *.svg
 message.txt
 .vscode
 **/results.csv
 bin/
+bin/*

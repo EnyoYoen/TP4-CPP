@@ -5,7 +5,10 @@ LDFLAGS =
 SRCS = main.cpp Reader.cpp Graph.cpp Request.cpp DateTime.cpp
 HEADERS = Reader.h Graph.h Request.h
 OBJS = $(SRCS:.cpp=.o)
-TARGET = analog 
+TARGET = bin/analog
+
+# Create the bin directory if it doesn't exist
+$(shell mkdir -p bin)
 
 all: $(TARGET)
 

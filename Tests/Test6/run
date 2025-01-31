@@ -1,1 +1,1 @@
-../../analog.exe -t 12 -g out.dot ../../exemple-mini-non-exhaustif.txt
+./../../bin/analog -t 12 -g out.dot ../../exemple-mini-non-exhaustif.txt
