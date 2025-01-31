@@ -41,8 +41,6 @@ void Graph::unmarshalRequest(const string &rawRequest)
 			return;
 		}
 
-		requests[req.resource] = req.infos;
-
 		const string &source = getSourceFromReferer(req.infos.referer);
 		const string &resource = trimOptions(req.resource);
 

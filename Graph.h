@@ -51,8 +51,6 @@ private:
     unordered_map<string, int> vertices;
     unordered_map<int, string> reverseVertices;
     unordered_map<int, unordered_map<int, int>> edges;
-
-    unordered_map<string, Infos> requests;
 };
 
 #endif // GRAPH_H
