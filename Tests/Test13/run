@@ -1,1 +1,1 @@
-../../analog.exe test_empty.log
+./../../bin/analog test_empty.log

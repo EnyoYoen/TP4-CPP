@@ -1,1 +1,1 @@
-../../analog.exe fake.log
+./../../bin/analog fake.log
