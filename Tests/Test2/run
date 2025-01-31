@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 ./../../bin/analog -g output.dot test2.log || (test -e output.dot|| echo "File does not exist" && exit 1);
-=======
-./../../bin/analog -g output.dot test2.log && [ -f output.dot ] && exit 0 || exit 1
->>>>>>> origin/main
