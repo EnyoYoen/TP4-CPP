@@ -9,9 +9,9 @@ bool sortHits(const Hits &a, const Hits &b)
 	return a.second > b.second;
 }
 
-Graph::Graph(const string &start, int hour, bool exclude)
+Graph::Graph(const string &fromReferer, const string &toRessource, const string &start, int hour, bool exclude)
 	// Constructeur
-	: exclude(exclude), hour(hour), nextVertexId(0)
+	: fromReferer(fromReferer), toRessource(toRessource), exclude(exclude), hour(hour), nextVertexId(0)
 {
 	if (!start.empty())
 	{
@@ -36,7 +36,7 @@ void Graph::unmarshalRequest(const string &rawRequest)
 		istringstream iss(rawRequest);
 		iss >> req;
 
-		if (isExtensionExcluded(req.resource) || isTimeExcluded(req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode))
+		if (isExtensionExcluded(req.resource) || isTimeExcluded(req.infos.dateTime) || isStatusCodeCorrect(req.infos.statusCode) || !isRefererCorrect(req.infos.referer) || !isRessourceCorrect(req.resource))
 		{
 			return;
 		}
@@ -205,4 +205,14 @@ bool Graph::isTimeExcluded(const DateTime &dt) const
 bool Graph::isStatusCodeCorrect(const int code) const
 {
 	return !(code >= 200 && code < 400);
+}
+
+bool Graph::isRefererCorrect(const string &referer) const
+{
+	return fromReferer.empty() || referer == fromReferer;
+}
+
+bool Graph::isRessourceCorrect(const string &ressource) const
+{
+	return toRessource.empty() || ressource == toRessource;
 }

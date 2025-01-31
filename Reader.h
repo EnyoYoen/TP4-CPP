@@ -12,16 +12,17 @@ Cette classe permet de gérer toutes les opérations de fichiers
 et de générer le graphe associé.
 */
 
-class Reader {
+class Reader
+{
 public:
-    Reader(const string& filename, const string& start = string(), int hour = -1, bool exclude = false);
+    Reader(const string &filename, const string &fromReferer, const string &toRessource, const string &start = string(), int hour = -1, bool exclude = false);
 
     void readRequests();
 
-    void writeGraph(const string& out);
+    void writeGraph(const string &out);
 
 private:
-    void writeGraphToFile(const string& out);
+    void writeGraphToFile(const string &out);
 
     Graph graph;
     string filename;

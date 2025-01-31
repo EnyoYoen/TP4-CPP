@@ -30,9 +30,22 @@ Cette option permet de ne prendre en compte que les hits qui sont dans le créne
 - `-d CLF`
 
 Cette option permet de ne prendre en compte que les hits qui sont dans le créneau horaire correspondant à l’intervalle [CLF, CLF + 1 heure].
+Exemple : -d 08/Sep/2012:11:16:02
+
+- `-r referer`
+
+Cette option permet de ne prendre en compte que les hits qui viennent du referer en paramètre.
+
+- `-s ressource`
+
+Cette option permet de ne prendre en compte que les hits qui touchent la ressource en paramètre.
 
 ### Génération du graphe
 
 Afin de générer le graphe, nous avons utilisé un [Google Colab](https://colab.research.google.com/drive/1majZD5knMa9tQFhNKNB2k5eNkj9B504m?usp=sharing), qui permet de générer l'image beaucoup plus rapidement que sur nos machines personnelles.
+
+### Vérification des requêtes
+
+Nous avons fait des vérifications lors du parsing de chaque ligne du fichier log (dans les fichiers Request et DateTime) afin de détecter des lignes invalides, en levant des exceptions. Si une ligne du fichier log est invalide, un message d'erreur est affiché sur `cerr` mais l'execution du programme continue en ignorant la requête.
 
 ![Alt Text](https://static.printler.com/cache/c/4/1/7/d/c/c417dc9c0acfba8b61c6a40e81636b953e9a5566.jpg)

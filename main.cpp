@@ -14,6 +14,8 @@ int showHelp(char *exec_path)
 	cerr << "  -e : exclut les documents de type 'image', 'css' et 'js'" << endl;
 	cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << endl;
 	cerr << "  -d <CLF> : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << endl;
+	cerr << "  -r <referer> : ne prend en compte que les requêtes provenant de <referer>" << endl;
+	cerr << "  -s <ressource> : ne prend en compte que les requêtes vers <ressource>" << endl;
 	cerr << "  -h : affiche ce message d'aide" << endl;
 
 	return 1;
@@ -34,6 +36,9 @@ int main(int argc, char *argv[])
 
 	bool makeGraph = false;
 	string graphOutput = string();
+
+	string fromReferer = string();
+	string toRessource = string();
 
 	int i = 1;
 	while (i < argc - 1)
@@ -101,6 +106,30 @@ int main(int argc, char *argv[])
 
 			i += 2;
 		}
+		else if (strncmp(argv[i], "-r", 3) == 0)
+		{
+			// Paramètre '-r'
+			if (!fromReferer.empty())
+			{
+				return showHelp(argv[0]);
+			}
+
+			fromReferer = argv[i + 1];
+
+			i += 2;
+		}
+		else if (strncmp(argv[i], "-s", 3) == 0)
+		{
+			// Paramètre '-s'
+			if (!toRessource.empty())
+			{
+				return showHelp(argv[0]);
+			}
+
+			toRessource = argv[i + 1];
+
+			i += 2;
+		}
 		else
 		{
 			// Tout le reste (y compris le paramètre '-h' :)
@@ -114,7 +143,7 @@ int main(int argc, char *argv[])
 	}
 	string inputFile = argv[argc - 1];
 
-	Reader reader(inputFile, timeLimitStr, timeLimit, excludeMeta);
+	Reader reader(inputFile, fromReferer, toRessource, timeLimitStr, timeLimit, excludeMeta);
 
 	try
 	{

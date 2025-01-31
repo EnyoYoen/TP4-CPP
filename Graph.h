@@ -20,28 +20,32 @@ typedef pair<const int, int> Edge;
 typedef pair<const string, int> Vertex;
 typedef pair<const int, unordered_map<int, int>> EdgeMap;
 
-class Graph {
+class Graph
+{
 public:
-    Graph(const string& start = string(), int hour = -1, bool exclude = false);
+    Graph(const string &fromReferer = string(), const string &toRessource = string(), const string &start = string(), int hour = -1, bool exclude = false);
 
-    void unmarshalRequest(const string& rawRequest);
+    void unmarshalRequest(const string &rawRequest);
 
     list<Hits> getMostHitResources() const;
 
-    friend ostream& operator<<(ostream& os, const Graph& graph);
+    friend ostream &operator<<(ostream &os, const Graph &graph);
 
 private:
-    const string trimOptions(const string& address) const;
-    const string getSourceFromReferer(const string& referer) const;
-    bool isExtensionExcluded(const string& resource) const;
-    bool isTimeExcluded(const DateTime& dt) const;
+    const string trimOptions(const string &address) const;
+    const string getSourceFromReferer(const string &referer) const;
+    bool isExtensionExcluded(const string &resource) const;
+    bool isTimeExcluded(const DateTime &dt) const;
     bool isStatusCodeCorrect(const int code) const;
-
+    bool isRefererCorrect(const string &referer) const;
+    bool isRessourceCorrect(const string &ressource) const;
 
     bool startSet;
     bool exclude;
     int hour;
     DateTime start;
+    string fromReferer;
+    string toRessource;
 
     size_t nextVertexId;
     unordered_map<string, int> vertices;
