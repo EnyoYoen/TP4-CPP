@@ -1,7 +1,9 @@
 # TP C++ n°4
+
 ## Analyse de logs apache
 
 Binômes:
+
 - B3212: Yoen PEYROT, William MICHAUD
 - B3210: Leo MARNAS, Clement JAQUIER
 
@@ -13,7 +15,7 @@ Le programme s'exécute différemment en fonction des paramètres de la ligne de
 
 Par défaut, c’est-à-dire quand il n’y a aucune option, il affichera sur la console sous forme textuelle
 la liste des 10 documents les plus consultés par ordre décroissant de popularité. Aucun fichier
-“.dot” n’est généré dans ce cas. 
+“.dot” n’est généré dans ce cas.
 
 - `-g nomfichier.dot`
 
@@ -30,6 +32,11 @@ javascript.
 
 Cette option permet de ne prendre en compte que les hits qui sont dans le créneau horaire
 correspondant à l’intervalle [heure, heure+1[.
+
+- `-d CLF`
+
+Cette option permet de ne prendre en compte que les hits qui sont dans le créneau horaire
+correspondant à l’intervalle [CLF, CLF + 1 heure].
 
 ### Génération du graphe
 

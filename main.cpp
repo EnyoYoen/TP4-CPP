@@ -88,7 +88,8 @@ int main(int argc, char *argv[])
 		}
 		else if (strncmp(argv[i], "-d", 3) == 0)
 		{
-			const char* clf = argv[i + 1];
+			// Paramètre -d : spécifie une date au format CLF et regarde dans l'intervalle
+			const char *clf = argv[i + 1];
 			if (!DateTime::isDateTimeCorrect(string(clf)))
 			{
 				cerr << "Date invalide: " << clf << endl;

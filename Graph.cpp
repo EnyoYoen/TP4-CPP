@@ -9,7 +9,7 @@ bool sortHits(const Hits &a, const Hits &b)
 	return a.second > b.second;
 }
 
-Graph::Graph(const string& start, int hour, bool exclude)
+Graph::Graph(const string &start, int hour, bool exclude)
 	// Constructeur
 	: exclude(exclude), hour(hour), nextVertexId(0)
 {
@@ -18,7 +18,9 @@ Graph::Graph(const string& start, int hour, bool exclude)
 		istringstream iss(start);
 		iss >> this->start;
 		startSet = true;
-	} else {
+	}
+	else
+	{
 		startSet = false;
 	}
 }
@@ -175,15 +177,15 @@ bool Graph::isExtensionExcluded(const string &resource) const
 
 bool Graph::isTimeExcluded(const DateTime &dt) const
 {
-	// Exclut les requetes qui ne sont pas dans l'intervalle [heure, heure+1[
-
 	bool result = false;
 
+	// Exclut les requetes qui ne sont pas dans l'intervalle [heure, heure+1[
 	if (hour != -1 && dt.getHour() != hour)
 	{
 		result = true;
 	}
 
+	// Exclut les requetes qui ne sont pas dans l'intervalle [clf, clf + 1 heure]
 	if (startSet)
 	{
 		ll seconds = dt.secondsBetween(start);

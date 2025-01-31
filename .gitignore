@@ -5,3 +5,4 @@ analog*
 message.txt
 .vscode
 **/results.csv
+bin/
