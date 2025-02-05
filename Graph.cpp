@@ -1,18 +1,42 @@
-#include "Graph.h"
+//---------- Réalisation de la classe <Graph> (fichier Graph.cpp) ------------
 
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <iostream>
 #include <sstream>
 
+
+//------------------------------------------------------ Include personnel
+#include "Graph.h"
+
+
+//------------------------------------------------------------- Constantes
+
+
+//----------------------------------------------------------------- Fonction comparaison
 bool sortHits(const Hits &a, const Hits &b)
+// Algorithme :
+//
 {
 	// Compare deux hits pour les trier
 	return a.second > b.second;
-}
+} //----- Fin de Fonction
 
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Constructeurs - destructeur
+
+//-------------------------------------------- Constructeur
 Graph::Graph(const string &fromReferer, const string &toRessource, const string &start, int hour, bool exclude)
-	// Constructeur
+// Algorithme :
+//
 	: fromReferer(fromReferer), toRessource(toRessource), exclude(exclude), hour(hour), nextVertexId(0)
 {
+	#ifdef MAP
+    cout << "Appel au constructeur de <Graph>" << endl;
+	#endif
+
 	if (!start.empty())
 	{
 		istringstream iss(start);
@@ -23,10 +47,27 @@ Graph::Graph(const string &fromReferer, const string &toRessource, const string 
 	{
 		startSet = false;
 	}
-}
+} //----- Fin de Méthode
 
-void Graph::unmarshalRequest(const string &rawRequest)
+//-------------------------------------------- Destructeur
+Graph::~Graph()
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel au destructeur de <Graph>";
+	#endif
+} //----- Fin de Méthode
+
+
+//----------------------------------------------------- Méthodes publiques
+void Graph::unmarshalRequest(const string &rawRequest)
+// Algorithme :
+//
+{
+	#ifdef MAP
+    cout << "Appel a la methode unmarshalRequest" << endl;
+	#endif
 	// Ajoute une requete au graphe
 
 	try
@@ -82,10 +123,15 @@ void Graph::unmarshalRequest(const string &rawRequest)
 	{
 		cerr << "Invalid Request (may be incorrect: " << e.what() << "): " << rawRequest << endl;
 	}
-}
+} //----- Fin de Méthode
 
 list<Hits> Graph::getMostHitResources() const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode getMostHitResources";
+	#endif
 	// Retourne les 10 ressources les plus demandées
 
 	unordered_map<string, int> hits;
@@ -115,10 +161,16 @@ list<Hits> Graph::getMostHitResources() const
 	result.sort(sortHits);
 
 	return result;
-}
+} //----- Fin de Méthode
 
+//------------------------------------------------- Surcharge d'opérateurs
 ostream &operator<<(ostream &os, const Graph &graph)
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la surcharge de l'operateur <<";
+	#endif
 	// Permet de generer le graphe au format .dot
 
 	os << "digraph {" << endl;
@@ -137,29 +189,51 @@ ostream &operator<<(ostream &os, const Graph &graph)
 	os << "}" << endl;
 
 	return os;
-}
+} //----- Fin de Méthode
+
+
+//----------------------------------------------------------------- PRIVE
+//----------------------------------------------------- Méthodes privées
 
 const string Graph::getSourceFromReferer(const string &referer) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode getSourceFromReferer";
+	#endif
+
 	// Extrait la source de la requete referer
 
 	size_t last = referer.find_last_of('/');
 	string source = referer.substr(last == string::npos ? 0 : last, referer.size());
 	return trimOptions(source);
-}
+} //----- Fin de Méthode
 
 const string Graph::trimOptions(const string &address) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode trimOptions";
+	#endif
+
 	// Extrait l'adresse sans les options
 
 	size_t option = address.find_first_of('?');
 	string trimmedAddress = address.substr(0, option == string::npos ? address.size() : option);
 	size_t jsessionid = address.find(";jsessionid");
 	return trimmedAddress.substr(0, (jsessionid == string::npos) != 0 ? trimmedAddress.size() : jsessionid);
-}
+} //----- Fin de Méthode
 
 bool Graph::isExtensionExcluded(const string &resource) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode isExtensionExcluded";
+	#endif
+
 	// Exclut les ressources de type 'image', 'css' et 'js'
 
 	bool result = false;
@@ -178,10 +252,16 @@ bool Graph::isExtensionExcluded(const string &resource) const
 	}
 
 	return result;
-}
+} //----- Fin de Méthode
 
 bool Graph::isTimeExcluded(const DateTime &dt) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode isTimeExcluded";
+	#endif
+
 	bool result = false;
 
 	// Exclut les requetes qui ne sont pas dans l'intervalle [heure, heure+1[
@@ -198,19 +278,37 @@ bool Graph::isTimeExcluded(const DateTime &dt) const
 	}
 
 	return result;
-}
+} //----- Fin de Méthode
 
 bool Graph::isStatusCodeCorrect(const int code) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode isStatusCodeCorrect";
+	#endif
+
 	return !(code >= 200 && code < 400);
-}
+} //----- Fin de Méthode
 
 bool Graph::isRefererCorrect(const string &referer) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode isRefererCorrect";
+	#endif
+
 	return fromReferer.empty() || referer == fromReferer;
-}
+} //----- Fin de Méthode
 
 bool Graph::isRessourceCorrect(const string &ressource) const
+// Algorithme :
+//
 {
+	#ifdef MAP
+	cout << "Appel a la methode isRessourceCorrect";
+	#endif
+
 	return toRessource.empty() || ressource == toRessource;
-}
+} //----- Fin de Méthode

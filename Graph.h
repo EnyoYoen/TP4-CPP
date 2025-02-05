@@ -1,37 +1,78 @@
+//---------- Interface de la classe <Graph> (fichier Graph.h) ----------------
 #ifndef GRAPH_H
 #define GRAPH_H
 
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <string>
 #include <list>
 #include <map>
 #include <unordered_map>
 
+//------------------------------------------------------ Include personnel
 #include "Request.h"
 #include "DateTime.h"
 
-using namespace std;
+//--------------------------------------------------- Interfaces utilisées
 
-/*
-Cette classe permet de représenter un graphe orienté, et de l'exporter au format .dot.
-*/
+//------------------------------------------------------------- Constantes
 
+//------------------------------------------------------------------ Types
 typedef pair<const string, int> Hits;
 typedef pair<const int, int> Edge;
 typedef pair<const string, int> Vertex;
 typedef pair<const int, unordered_map<int, int>> EdgeMap;
 
+//------------------------------------------------------------------------
+// Rôle de la classe <Graph>
+// Cette classe permet de représenter un graphe orienté, et de l'exporter au format .dot.
+//------------------------------------------------------------------------
+
+
 class Graph
 {
+//----------------------------------------------------------------- PUBLIC
 public:
-    Graph(const string &fromReferer = string(), const string &toRessource = string(), const string &start = string(), int hour = -1, bool exclude = false);
+//----------------------------------------------------- Méthodes publiques
 
+//-------------------------------------------- Constructeurs - destructeur
+    Graph(const string &fromReferer = string(), const string &toRessource = string(), const string &start = string(), int hour = -1, bool exclude = false);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Graph();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+//-------------------------------------------- Autres méthodes publiques
     void unmarshalRequest(const string &rawRequest);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     list<Hits> getMostHitResources() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
+//-------------------------------------------- Surcharge d'opérateurs
     friend ostream &operator<<(ostream &os, const Graph &graph);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
+//------------------------------------------------------------------ PRIVE
 private:
+//----------------------------------------------------- Méthodes privées
     const string trimOptions(const string &address) const;
     const string getSourceFromReferer(const string &referer) const;
     bool isExtensionExcluded(const string &resource) const;
@@ -40,6 +81,7 @@ private:
     bool isRefererCorrect(const string &referer) const;
     bool isRessourceCorrect(const string &ressource) const;
 
+//----------------------------------------------------- Attributs privés
     string fromReferer;
     string toRessource;
     bool startSet;
@@ -52,5 +94,7 @@ private:
     unordered_map<int, string> reverseVertices;
     unordered_map<int, unordered_map<int, int>> edges;
 };
+
+//-------------------------------- Autres définitions dépendantes de <Graph>
 
 #endif // GRAPH_H
