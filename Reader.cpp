@@ -1,11 +1,43 @@
-#include "Reader.h"
+//---------- Réalisation de la classe <Reader> (fichier Reader.cpp) ------------
 
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <fstream>
 
+//------------------------------------------------------ Include personnel
+#include "Reader.h"
+
+
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+//-------------------------------------------- Constructeur - destructeur
+
+// Constructeur 
 Reader::Reader(const string &filename, const string &fromReferer, const string &toRessource, const string &start, int hour, bool exclude)
-	: graph(fromReferer, toRessource, start, hour, exclude), filename(filename) {} // Constructeur
+	: graph(fromReferer, toRessource, start, hour, exclude), filename(filename) {} //----- Fin de Méthode
+
+
+// Destructeur
+Reader::~Reader() 
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Reader>" << endl;
+#endif
+} //----- Fin de Méthode
+
+
+//-------------------------------------------- Autres méthodes
 
 void Reader::readRequests()
+// Algorithme :
+//
 {
 	// Ouvre le fichier et génère le graphe
 	ifstream file(filename);
@@ -26,9 +58,13 @@ void Reader::readRequests()
 	}
 
 	file.close();
-}
+} //----- Fin de Méthode
+
+
 
 void Reader::writeGraph(const string &out)
+// Algorithme :
+//
 {
 	// Affiche les 10 ressources les plus demandées
 	list<Hits> hits = graph.getMostHitResources();
@@ -50,9 +86,16 @@ void Reader::writeGraph(const string &out)
 		// Ecrit le graphe au format .dot dans un fichier
 		writeGraphToFile(out);
 	}
-}
+} //----- Fin de Méthode
+
+
+//----------------------------------------------------------------- PRIVE
+
+//----------------------------------------------------- Méthode privée
 
 void Reader::writeGraphToFile(const string &out)
+// Algorithme :
+//
 {
 	// Ecrit le graphe au format .dot dans un fichier
 	ofstream file(out);
@@ -64,4 +107,4 @@ void Reader::writeGraphToFile(const string &out)
 	file << graph;
 
 	file.close();
-}
+}  //----- Fin de Méthode
