@@ -1,11 +1,19 @@
+//---------- Réalisation (fichier main.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
+#include <string.h>
+
+//------------------------------------------------------ Include personnel
 #include "Reader.h"
 #include "DateTime.h"
 
-#include <string.h>
-
-using namespace std;
-
+//--------------------------------------------------------------- Fonction showHelp
 int showHelp(char *exec_path)
+// Algorithme :
+//
 {
 	// Affiche l'aide
 	cerr << "Usage: " << exec_path << " [options] <nomfichier.log>" << endl;
@@ -19,8 +27,10 @@ int showHelp(char *exec_path)
 	cerr << "  -h : affiche ce message d'aide" << endl;
 
 	return 1;
-}
+} // Fin de Fonction
 
+
+//--------------------------------------------------------------- Fonction principale (main)
 int main(int argc, char *argv[])
 {
 	if (argc < 2)
@@ -157,4 +167,4 @@ int main(int argc, char *argv[])
 	}
 
 	return 0;
-}
+} //----- Fin de Main
