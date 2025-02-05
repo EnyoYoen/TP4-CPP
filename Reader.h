@@ -32,19 +32,39 @@ public:
 
 //----------------------------------------------------- Méthodes publiques
     void writeGraph(const string &out);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     void readRequests();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
     Reader(const string &filename, const string &fromReferer, const string &toRessource, const string &start = string(), int hour = -1, bool exclude = false);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     virtual ~Reader();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     
 //------------------------------------------------------------------ PRIVE
 private:
 //----------------------------------------------------- Méthodes privée
     void writeGraphToFile(const string &out);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //----------------------------------------------------- Attributs privées
     Graph graph;

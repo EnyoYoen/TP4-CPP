@@ -18,6 +18,8 @@
 //-------------------------------------------- Constructeur - destructeur
 
 // Constructeur 
+// Algorithme :
+//
 Reader::Reader(const string &filename, const string &fromReferer, const string &toRessource, const string &start, int hour, bool exclude)
 	: graph(fromReferer, toRessource, start, hour, exclude), filename(filename) {} //----- Fin de Méthode
 
@@ -39,6 +41,9 @@ void Reader::readRequests()
 // Algorithme :
 //
 {
+	#ifdef MAP
+    cout << "Appel a la methode readRequests" << endl;
+	#endif
 	// Ouvre le fichier et génère le graphe
 	ifstream file(filename);
 	if (!file.is_open())
@@ -66,6 +71,9 @@ void Reader::writeGraph(const string &out)
 // Algorithme :
 //
 {
+	#ifdef MAP
+    cout << "Appel a la methode writeGraph" << endl;
+	#endif
 	// Affiche les 10 ressources les plus demandées
 	list<Hits> hits = graph.getMostHitResources();
 
@@ -97,6 +105,9 @@ void Reader::writeGraphToFile(const string &out)
 // Algorithme :
 //
 {
+	#ifdef MAP
+    cout << "Appel a la methode writeGraphToFile" << endl;
+	#endif
 	// Ecrit le graphe au format .dot dans un fichier
 	ofstream file(out);
 	if (!file.is_open())
