@@ -15,7 +15,7 @@ int showHelp(char *exec_path)
 // Algorithme :
 //
 {
-	// Affiche l'aide
+	// Affichage de l'aide
 	cerr << "Usage: " << exec_path << " [options] <nomfichier.log>" << endl;
 	cerr << "Options:" << endl;
 	cerr << "  -g <nomfichier.dot> : génère un fichier au format GraphViz" << endl;

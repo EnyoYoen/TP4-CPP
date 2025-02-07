@@ -43,7 +43,7 @@ struct Infos {
 		  method(method), protocol(protocol), statusCode(statusCode), 
 		  size(size), referer(referer), userAgent(userAgent) {}
 	// Mode d'emploi :
-    //
+    // Ce constructeur permet de créer une nouvelle structure Infos à partir des informations passées en paramètre
     // Contrat :
     //
 	
@@ -87,7 +87,7 @@ public:
 			const string& userAgent)
 		: resource(resource), infos(ip, userLogName, userName, dateTime, method, protocol, statusCode, size, referer, userAgent) {}
 	// Mode d'emploi (constructeur de copie):
-    //
+    // Ce constructeur permet de créer une nouvelle requête à partir des informations passées en paramètre
     // Contrat :
     //
 	

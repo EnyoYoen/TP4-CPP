@@ -6,8 +6,8 @@ HEADERS = Reader.h Graph.h Request.h
 OBJS = $(addprefix bin/, $(notdir $(SRCS:.cpp=.o)))
 TARGET = bin/analog
 
-# Create the bin directory if it doesn't exist
-# On Windows, remove the -p option for mkdir
+# Créer le répertoire bin s'il n'existe pas
+# Sur Windows, enlever l'option -p de mkdir
 ifeq ($(OS),Windows_NT)
 	MKDIR = mkdir bin
 else

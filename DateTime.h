@@ -34,15 +34,15 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     DateTime() 
-     // Mode d'emploi :
+    // Mode d'emploi :
     //
     // Contrat :
     //
     {};
 
     virtual ~DateTime() 
-     // Mode d'emploi :
-    //
+    // Mode d'emploi :
+    // 
     // Contrat :
     //
     {};
@@ -50,14 +50,14 @@ public:
 //-------------------------------------------- Autres méthodes publiques
     ll secondsBetween(const DateTime &dt) const;
     // Mode d'emploi :
-    //  calcule le nombre de secondes écoulées entre l'instance actuelle de la 
-    //  classe DateTime et un autre objet DateTime passé en paramètre
+    // Cette méthode calcule le nombre de secondes écoulées entre l'instance actuelle de la 
+    // classe DateTime et d'un autre objet DateTime passé en paramètre
     // Contrat :
     //
 
     int getHour() const 
     // Mode d'emploi :
-    //  Cette méthode renvoie l'heure (au format 24 heures) de l'objet DateTime actuel
+    // Cette méthode renvoie l'heure (au format 24 heures) de l'objet DateTime actuel
     // Contrat :
     //
     { return hour; }
@@ -65,26 +65,26 @@ public:
 
     static bool isDateTimeCorrect(const string &clf);
     // Mode d'emploi :
-    //  vérifie si une chaîne de caractères (représentant une date et une heure) est valide
+    // Cette méthode vérifie si une chaîne de caractères (représentant une date et une heure) est valide
     // Contrat :
     //
 
     static bool isFullDateTimeCorrect(const string &clf);
     // Mode d'emploi :
-    //  vérifie si une chaîne de caractères est valide selon le format CLF avec une timezone
+    // Cette méthode vérifie si une chaîne de caractères est valide selon le format CLF avec une timezone
     // Contrat :
     //
 
 //------------------------------------------------- Surcharge d'opérateurs
     friend istream &operator>>(istream &is, DateTime &dt);
     // Mode d'emploi :
-    //
+    // 
     // Contrat :
     //
 
     friend ostream &operator<<(ostream &os, const DateTime &dt);
     // Mode d'emploi :
-    //
+    // 
     // Contrat :
     //
 

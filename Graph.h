@@ -40,7 +40,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Graph(const string &fromReferer = string(), const string &toRessource = string(), const string &start = string(), int hour = -1, bool exclude = false);
     // Mode d'emploi :
-    //  Initialise le graphe
+    // Constructeur qui initialise le graphe
     // Contrat :
     //
 
@@ -53,14 +53,14 @@ public:
 //-------------------------------------------- Autres méthodes publiques
     void unmarshalRequest(const string &rawRequest);
     // Mode d'emploi :
-    //  Parse une requête brute, extrait les informations pertinentes, et les ajoute au graphe.
-    //  Ajoute des sommets (vertices) et des arcs (edges) représentant les sites et leur fréquence d'accès.
+    // Cette méthode parse une requête brute, extrait les informations pertinentes, et les ajoute au graphe.
+    // Elle ajoute des sommets (vertices) et des arcs (edges) représentant les sites et leur fréquence d'accès.
     // Contrat :
     //
 
     list<Hits> getMostHitResources() const;
     // Mode d'emploi :
-    //  Retourne une liste des ressources les plus demandées, triée par fréquence (du plus demandé au moins demandé)
+    // Cette méthode retourne une liste des ressources les plus demandées, triées par fréquence (du plus demandé au moins demandé)
     // Contrat :
     //
 

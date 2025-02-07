@@ -68,11 +68,11 @@ void Graph::unmarshalRequest(const string &rawRequest)
 	#ifdef MAP
     cout << "Appel a la methode unmarshalRequest" << endl;
 	#endif
-	// Ajoute une requete au graphe
+	// Ajoute une requête au graphe
 
 	try
 	{
-		// Extrait les informations de la requete
+		// Extrait les informations de la requête
 		Request req;
 		istringstream iss(rawRequest);
 		iss >> req;
@@ -171,7 +171,7 @@ ostream &operator<<(ostream &os, const Graph &graph)
 	#ifdef MAP
 	cout << "Appel a la surcharge de l'operateur <<";
 	#endif
-	// Permet de generer le graphe au format .dot
+	// Permet de génerer le graphe au format .dot
 
 	os << "digraph {" << endl;
 	os << "layout = fdp;" << endl; // Le layout qui marche le mieux pour le rendering
@@ -203,7 +203,7 @@ const string Graph::getSourceFromReferer(const string &referer) const
 	cout << "Appel a la methode getSourceFromReferer";
 	#endif
 
-	// Extrait la source de la requete referer
+	// Extrait la source de la requête référée
 
 	size_t last = referer.find_last_of('/');
 	string source = referer.substr(last == string::npos ? 0 : last, referer.size());
@@ -264,13 +264,13 @@ bool Graph::isTimeExcluded(const DateTime &dt) const
 
 	bool result = false;
 
-	// Exclut les requetes qui ne sont pas dans l'intervalle [heure, heure+1[
+	// Exclut les requêtes qui ne sont pas dans l'intervalle [heure, heure+1[
 	if (hour != -1 && dt.getHour() != hour)
 	{
 		result = true;
 	}
 
-	// Exclut les requetes qui ne sont pas dans l'intervalle [clf, clf + 1 heure]
+	// Exclut les requêtes qui ne sont pas dans l'intervalle [clf, clf + 1 heure]
 	if (startSet)
 	{
 		ll seconds = dt.secondsBetween(start);
