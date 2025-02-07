@@ -1,22 +1,27 @@
 # NOM
+
     analog: Traite des fichiers de logs Apache
 
 # RESUME
+
     analog [options] <nomFichier.log>
 
 # DESCRIPTION
+
     analog est un outil de traitement de fichiers de logs Apache. Cet outil permet de générer un graphe des visites des utilisateurs.
 
 # EXEMPLES
+
 - Sans options, permet d'afficher les 10 documents les plus consultés:
-	```
-	bin/analog <nomFichier.log>
-	```
+
+  ```
+  bin/analog <nomFichier.log>
+  ```
 
 - Pour lancer analog avec des options:
-	```
-	bin/analog -param1 -param2 <fichierParam2> <nomFichier.log>
-	```
+  ```
+  bin/analog -param1 -param2 <fichierParam2> <nomFichier.log>
+  ```
 
 ## Options disponibles
 
@@ -40,13 +45,23 @@ correspondant à l’intervalle [heure, heure+1[.
 
 Cette option permet de ne prendre en compte que les hits qui sont dans le créneau horaire
 correspondant à l’intervalle [CLF, CLF + 1 heure].
+Exemple : -d 08/Sep/2012:11:16:02
 
+- `-r referer`
+
+Cette option permet de ne prendre en compte que les hits qui viennent du referer en paramètre.
+
+- `-s ressource`
+
+Cette option permet de ne prendre en compte que les hits qui touchent la ressource en paramètre.
 
 # VOIR AUSSI
+
 - `apache`
 
 # BUGS
-  Aucun bug connu, merci de signaler tout bug rencontré aux développeurs
+
+Aucun bug connu, merci de signaler tout bug rencontré aux développeurs
 
 # AUTEURS
 
@@ -54,4 +69,5 @@ correspondant à l’intervalle [CLF, CLF + 1 heure].
     - B3210: Leo MARNAS, Clement JAQUIER
 
 # COPYRIGHT
+
     © 2025 Yoen.site - All rights reserved.

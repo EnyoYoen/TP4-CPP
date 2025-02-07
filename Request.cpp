@@ -1,10 +1,40 @@
-#include "Request.h"
+//---------- Réalisation de la classe <Request> (fichier Request.cpp) ------------
 
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <sstream>
 #include <exception>
 
-istream &operator>>(istream &is, Request &req)
+//------------------------------------------------------ Include personnel
+#include "Request.h"
+
+
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+//-------------------------------------------- Destructeur
+Request::~Request()
+// Algorithme :
+//
 {
+#ifdef MAP
+    cout << "Appel au destructeur de <Request>" << endl;
+#endif
+} //----- Fin de Méthode
+
+//------------------------------------------------- Surcharge d'opérateurs
+
+istream &operator>>(istream &is, Request &req)
+// Algorithme :
+//
+{
+    #ifdef MAP
+    cout << "Appel a la surcharge de l'operateur >>" << endl;
+    #endif
     // Permet de parser les informations pour une ligne de log
     getline(is, req.infos.ip, ' ');
     if (req.infos.ip.empty())
@@ -18,7 +48,7 @@ istream &operator>>(istream &is, Request &req)
     if (req.infos.userName.empty())
         throw runtime_error("Invalid User name");
 
-    is.ignore(1); // Ignore the opening bracket
+    is.ignore(1); // Ignore le crochet ouvrant
 
     string dtStr;
     getline(is, dtStr, ']');
@@ -27,7 +57,7 @@ istream &operator>>(istream &is, Request &req)
     istringstream dateStream(dtStr);
     dateStream >> req.infos.dateTime;
 
-    is.ignore(2); // Ignore the space and the opening quote
+    is.ignore(2); // Ignore l'espace et le guillemet
 
     getline(is, req.infos.method, ' ');
     if (req.infos.method.empty())
@@ -41,13 +71,13 @@ istream &operator>>(istream &is, Request &req)
     if (req.infos.protocol.empty())
         throw runtime_error("Invalid Protocol");
 
-    is.ignore(1); // Ignore the space
+    is.ignore(1); // Ignore l'espace
 
     is >> req.infos.statusCode;
     if (req.infos.statusCode < 100 || req.infos.statusCode >= 600)
         throw runtime_error("Invalid status code");
 
-    is.ignore(1); // Ignore the space
+    is.ignore(1); // Ignore l'espace
 
     string size;
     getline(is, size, ' ');
@@ -59,24 +89,29 @@ istream &operator>>(istream &is, Request &req)
     if (req.infos.size < 0)
         throw runtime_error("Invalid Size");
 
-    is.ignore(1); // Ignore the space and the opening quote
+    is.ignore(1); // Ignore l'espace et le guillemet
 
     getline(is, req.infos.referer, '"');
     if (req.infos.referer.empty())
         throw runtime_error("Invalid Referer");
 
-    is.ignore(2); // Ignore the space and the opening quote
+    is.ignore(2); // Ignore l'espace et le guillemet
 
     getline(is, req.infos.userAgent, '"');
 
     return is;
-}
+} //----- Fin de Méthode
 
 ostream &operator<<(ostream &os, const Request &req)
+// Algorithme :
+//
 {
+    #ifdef MAP
+    cout << "Appel a la surcharge de l'operateur <<" << endl;
+    #endif
     // Permet d'afficher les informations récupérée
     // Utilisée pour le debug
     os << req.infos.ip << " " << req.infos.userLogName << " " << req.infos.userName << " " << req.infos.dateTime << "] \"" << req.infos.method << " " << req.resource << " " << req.infos.protocol << "\" \"" << req.infos.userAgent << "\"";
 
     return os;
-}
+} //----- Fin de Méthode

@@ -1,29 +1,41 @@
+//---------- Réalisation (fichier main.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
+#include <string.h>
+
+//------------------------------------------------------ Include personnel
 #include "Reader.h"
 #include "DateTime.h"
 
-#include <string.h>
-
-using namespace std;
-
+//--------------------------------------------------------------- Fonction showHelp
 const string RED = "\033[31m";
 const string UNDERLINE = "\033[4m";
 const string ITALIC = "\033[3m";
 const string RESET = "\033[0m";
 
 int showHelp(char *exec_path)
+// Algorithme :
+//
 {
-	// Affiche l'aide
+	// Affichage de l'aide
 	cerr << RED << UNDERLINE << "Usage:" << RESET << RED << " " << exec_path << " " << ITALIC << "[options]" << RESET << RED << " <nomfichier.log>" << RESET << endl;
 	cerr << RED << UNDERLINE << "Options:" << RESET << endl;
 	cerr << RED << "  -g " << ITALIC << "<nomfichier.dot>" << RESET << RED << " : génère un fichier au format GraphViz" << RESET << endl;
 	cerr << RED << "  -e : exclut les documents de type 'image', 'css' et 'js'" << RESET << endl;
 	cerr << RED << "  -t " << ITALIC << "<heure>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << RESET << endl;
 	cerr << RED << "  -d " << ITALIC << "<CLF>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << RESET << endl;
+	cerr << "  -r <referer> : ne prend en compte que les requêtes provenant de <referer>" << endl;
+	cerr << "  -s <ressource> : ne prend en compte que les requêtes vers <ressource>" << endl;
 	cerr << RED << "  -h : affiche ce message d'aide" << RESET << endl;
 
 	return 1;
-}
+} // Fin de Fonction
 
+
+//--------------------------------------------------------------- Fonction principale (main)
 int main(int argc, char *argv[])
 {
 	if (argc < 2)
@@ -39,6 +51,9 @@ int main(int argc, char *argv[])
 
 	bool makeGraph = false;
 	string graphOutput = string();
+
+	string fromReferer = string();
+	string toRessource = string();
 
 	int i = 1;
 	while (i < argc - 1)
@@ -106,6 +121,30 @@ int main(int argc, char *argv[])
 
 			i += 2;
 		}
+		else if (strncmp(argv[i], "-r", 3) == 0)
+		{
+			// Paramètre '-r'
+			if (!fromReferer.empty())
+			{
+				return showHelp(argv[0]);
+			}
+
+			fromReferer = argv[i + 1];
+
+			i += 2;
+		}
+		else if (strncmp(argv[i], "-s", 3) == 0)
+		{
+			// Paramètre '-s'
+			if (!toRessource.empty())
+			{
+				return showHelp(argv[0]);
+			}
+
+			toRessource = argv[i + 1];
+
+			i += 2;
+		}
 		else
 		{
 			// Tout le reste (y compris le paramètre '-h' :)
@@ -119,7 +158,7 @@ int main(int argc, char *argv[])
 	}
 	string inputFile = argv[argc - 1];
 
-	Reader reader(inputFile, timeLimitStr, timeLimit, excludeMeta);
+	Reader reader(inputFile, fromReferer, toRessource, timeLimitStr, timeLimit, excludeMeta);
 
 	try
 	{
@@ -133,4 +172,4 @@ int main(int argc, char *argv[])
 	}
 
 	return 0;
-}
+} //----- Fin de Main
