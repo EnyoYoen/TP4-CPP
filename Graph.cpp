@@ -121,7 +121,7 @@ void Graph::unmarshalRequest(const string &rawRequest)
 	}
 	catch (const runtime_error &e)
 	{
-		cerr << "Invalid Request (may be incorrect: " << e.what() << "): " << rawRequest << endl;
+		cerr << "\033[31m" << "Invalid Request (may be incorrect: " << e.what() << "): " << rawRequest << "\033[0m" << endl;
 	}
 } //----- Fin de Méthode
 
