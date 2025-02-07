@@ -18,6 +18,7 @@ $(shell $(MKDIR))
 
 all: $(TARGET)
 	chmod +x $(TARGET)
+	chmod +x Tests/mktest.sh Tests/test.sh
 
 $(TARGET): $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $^
