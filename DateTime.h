@@ -50,13 +50,14 @@ public:
 //-------------------------------------------- Autres méthodes publiques
     ll secondsBetween(const DateTime &dt) const;
     // Mode d'emploi :
-    //
+    //  calcule le nombre de secondes écoulées entre l'instance actuelle de la 
+    //  classe DateTime et un autre objet DateTime passé en paramètre
     // Contrat :
     //
 
     int getHour() const 
     // Mode d'emploi :
-    //
+    //  Cette méthode renvoie l'heure (au format 24 heures) de l'objet DateTime actuel
     // Contrat :
     //
     { return hour; }
@@ -64,13 +65,13 @@ public:
 
     static bool isDateTimeCorrect(const string &clf);
     // Mode d'emploi :
-    //
+    //  vérifie si une chaîne de caractères (représentant une date et une heure) est valide
     // Contrat :
     //
 
     static bool isFullDateTimeCorrect(const string &clf);
     // Mode d'emploi :
-    //
+    //  vérifie si une chaîne de caractères est valide selon le format CLF avec une timezone
     // Contrat :
     //
 

@@ -33,13 +33,14 @@ public:
 //----------------------------------------------------- Méthodes publiques
     void writeGraph(const string &out);
     // Mode d'emploi :
-    //
+    //  Cette méthode affiche les 10 ressources les plus demandées dans la console 
+    //  si un chemin de fichier out est fourni, génère le fichier au format .dot 
     // Contrat :
     //
 
     void readRequests();
     // Mode d'emploi :
-    //
+    //  Ouvre un fichier spécifié par l'attribut filename, lit chaque ligne et l'ajoute au graphe en appelant unmarshalRequest() pour chaque ligne
     // Contrat :
     //
 
