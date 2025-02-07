@@ -21,14 +21,14 @@ int showHelp(char *exec_path)
 //
 {
 	// Affichage de l'aide
-	cerr << RED << UNDERLINE << "Usage:" << RESET << RED << " " << exec_path << " " << ITALIC << "[options]" << RESET << RED << " <nomfichier.log>" << RESET << endl;
+	cerr << RED << UNDERLINE << "Usage:" << RESET << RED << " " << exec_path << " " << ITALIC << "[options]" << " <nomfichier.log>" << RESET << endl;
 	cerr << RED << UNDERLINE << "Options:" << RESET << endl;
 	cerr << RED << "  -g " << ITALIC << "<nomfichier.dot>" << RESET << RED << " : génère un fichier au format GraphViz" << RESET << endl;
 	cerr << RED << "  -e : exclut les documents de type 'image', 'css' et 'js'" << RESET << endl;
 	cerr << RED << "  -t " << ITALIC << "<heure>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << RESET << endl;
 	cerr << RED << "  -d " << ITALIC << "<CLF>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << RESET << endl;
-	cerr << RED << "  -r <referer> : ne prend en compte que les requêtes provenant de <referer>" << RESET << endl;
-	cerr << RED << "  -s <ressource> : ne prend en compte que les requêtes vers <ressource>" << RESET << endl;
+	cerr << RED << "  -r " << ITALIC << "<referer>" << RESET << RED << " : ne prend en compte que les requêtes provenant de <referer>" << RESET << endl;
+	cerr << RED << "  -s " << ITALIC << "<ressource>" << RESET << RED << " : ne prend en compte que les requêtes vers <ressource>" << RESET << endl;
 	cerr << RED << "  -h : affiche ce message d'aide" << RESET << endl;
 
 	return 1;
