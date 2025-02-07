@@ -27,8 +27,8 @@ int showHelp(char *exec_path)
 	cerr << RED << "  -e : exclut les documents de type 'image', 'css' et 'js'" << RESET << endl;
 	cerr << RED << "  -t " << ITALIC << "<heure>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << RESET << endl;
 	cerr << RED << "  -d " << ITALIC << "<CLF>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << RESET << endl;
-	cerr << RED << "  -r " << ITALIC << "<referer>" << RESET << RED << " : ne prend en compte que les requêtes provenant de <referer>" << RESET << endl;
-	cerr << RED << "  -s " << ITALIC << "<ressource>" << RESET << RED << " : ne prend en compte que les requêtes vers <ressource>" << RESET << endl;
+	cerr << RED << "  -r " << ITALIC << "<referer>" << RESET << RED << " : ne prend en compte que les requêtes provenant de " << ITALIC << "<referer>" << RESET << endl;
+	cerr << RED << "  -s " << ITALIC << "<ressource>" << RESET << RED << " : ne prend en compte que les requêtes vers " << ITALIC << "<ressource>" << RESET << endl;
 	cerr << RED << "  -h : affiche ce message d'aide" << RESET << endl;
 
 	return 1;
