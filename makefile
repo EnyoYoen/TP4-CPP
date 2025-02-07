@@ -17,6 +17,7 @@ endif
 $(shell $(MKDIR))
 
 all: $(TARGET)
+	chmod +x $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $^
