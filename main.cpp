@@ -5,16 +5,21 @@
 
 using namespace std;
 
+const string RED = "\033[31m";
+const string UNDERLINE = "\033[4m";
+const string ITALIC = "\033[3m";
+const string RESET = "\033[0m";
+
 int showHelp(char *exec_path)
 {
 	// Affiche l'aide
-	cerr << "Usage: " << exec_path << " [options] <nomfichier.log>" << endl;
-	cerr << "Options:" << endl;
-	cerr << "  -g <nomfichier.dot> : génère un fichier au format GraphViz" << endl;
-	cerr << "  -e : exclut les documents de type 'image', 'css' et 'js'" << endl;
-	cerr << "  -t <heure> : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << endl;
-	cerr << "  -d <CLF> : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << endl;
-	cerr << "  -h : affiche ce message d'aide" << endl;
+	cerr << RED << UNDERLINE << "Usage:" << RESET << RED << " " << exec_path << " " << ITALIC << "[options]" << RESET << RED << " <nomfichier.log>" << RESET << endl;
+	cerr << RED << UNDERLINE << "Options:" << RESET << endl;
+	cerr << RED << "  -g " << ITALIC << "<nomfichier.dot>" << RESET << RED << " : génère un fichier au format GraphViz" << RESET << endl;
+	cerr << RED << "  -e : exclut les documents de type 'image', 'css' et 'js'" << RESET << endl;
+	cerr << RED << "  -t " << ITALIC << "<heure>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [heure, heure+1[ pour chaque jour" << RESET << endl;
+	cerr << RED << "  -d " << ITALIC << "<CLF>" << RESET << RED << " : ne prend en compte que les requêtes sur l'intervalle [CLF, CLF+1[" << RESET << endl;
+	cerr << RED << "  -h : affiche ce message d'aide" << RESET << endl;
 
 	return 1;
 }
@@ -75,13 +80,13 @@ int main(int argc, char *argv[])
 			}
 			catch (const invalid_argument &)
 			{
-				cerr << "Heure invalide: " << argv[i + 1] << endl;
+				cerr << RED << "Heure invalide: " << argv[i + 1] << RESET << endl;
 				return showHelp(argv[0]);
 			}
 
 			if (timeLimit < 0 || timeLimit > 23)
 			{
-				cerr << "Heure invalide: " << argv[i + 1] << endl;
+				cerr << RED << "Heure invalide: " << argv[i + 1] << RESET << endl;
 				return showHelp(argv[0]);
 			}
 
@@ -93,7 +98,7 @@ int main(int argc, char *argv[])
 			const char *clf = argv[i + 1];
 			if (!DateTime::isDateTimeCorrect(string(clf)))
 			{
-				cerr << "Date invalide: " << clf << endl;
+				cerr << RED << "Date invalide: " << clf << RESET << endl;
 				return showHelp(argv[0]);
 			}
 
@@ -123,7 +128,7 @@ int main(int argc, char *argv[])
 	}
 	catch (const runtime_error &e)
 	{
-		cerr << "Runtime error: " << e.what() << endl;
+		cerr << RED << "Runtime error: " << e.what() << RESET << endl;
 		return showHelp(argv[0]);
 	}
 
